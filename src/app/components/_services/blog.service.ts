@@ -66,7 +66,7 @@ export class BlogService {
     return this.http.post<Blog>(url, JSON.stringify(body), options).toPromise().then(res => res as Blog);
   }
 
-  getById(id: number) {
-    return this.http.get<Blog>(`${environment.apiUrl}/users/${id}`);
+  getById(id: number): Promise<Blog> {
+    return this.http.get<Blog>(`${environment.apiUrl}/blog/${id}`).toPromise().then(res => res as Blog);
   }
 }

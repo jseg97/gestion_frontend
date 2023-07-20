@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Rellax from 'rellax';
 
 @Component({
@@ -6,7 +6,7 @@ import * as Rellax from 'rellax';
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements OnInit, OnDestroy {
   data : Date = new Date();
   focus;
   focus1;
@@ -21,6 +21,7 @@ export class LandingComponent implements OnInit {
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
   }
+  
   ngOnDestroy(){
     var body = document.getElementsByTagName('body')[0];
     body.classList.remove('landing-page');

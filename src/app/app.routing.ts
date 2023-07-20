@@ -22,6 +22,7 @@ import { UsersComponent } from './components/users/users.component';
 import { PublicBlogComponent } from './components/public-blog/public-blog.component';
 import { OurServicesComponent } from './components/our-services/our-services.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { BlogEntryComponent } from './components/blog-entry/blog-entry.component';
 
 const routes: Routes =[
     // { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -45,6 +46,10 @@ const routes: Routes =[
     {
         path: 'servicios',
         component: OurServicesComponent,
+    },
+    {
+        path: 'blog/entry/:id',
+        component: BlogEntryComponent,
     },
     {
         path: 'blogs',
