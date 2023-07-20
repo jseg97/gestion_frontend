@@ -1,0 +1,39 @@
+.title {
+    display: flex;
+    align-items: center;
+    font-size: 80px;
+    text-align: left;
+    font-weight: 800;
+}
+
+.midContainer {
+    width: 45vw;
+}
+
+.section {
+    display: flex;
+    /* height: 700px; */
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+
+}
+.section img{
+    height: 100%;
+
+}
+
+.midContainer img {
+    height: 100%;
+}
+
+.phraseTitle {
+    font-size: 60px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.author {
+    font-weight: bold;
+    margin-bottom: 0;
+}

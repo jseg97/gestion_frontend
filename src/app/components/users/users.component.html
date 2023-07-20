@@ -1,0 +1,35 @@
+
+
+<div class="adminScreen">
+    <h1>Usuarios</h1>
+    <table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Username</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Email</th>
+				<th scope="col">Rol</th>
+				<th scope="col" style="text-align: center;">Accion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let user of users">
+				<th scope="row">{{ user.id }}</th>
+				<th scope="row">{{ user.username }}</th>
+				<td>{{ user.firstName }}</td>
+				<td>{{ user.lastName }}</td>
+				<td>{{ user.email }}</td>
+				<td>{{ user.role }}</td>
+				<td>
+                    <div class="actionIcons">
+                        <i class="material-icons iconButton" (click)="edit(user)">edit</i>
+                        <i class="material-icons iconButton" >delete</i>
+                    </div>
+                </td>
+			</tr>
+		</tbody>
+	</table>
+      
+</div>

@@ -1,0 +1,62 @@
+.logo {
+    flex: 0 0 200px;
+    /* Set a fixed width for the logo container */
+    margin-right: 20px;
+    align-self: center;
+}
+
+/* Style the logo image */
+.logo img {
+    max-width: 100%;
+}
+
+/* Style the information columns */
+.info-column {
+    flex: 1;
+    /* Allow the columns to grow and share the available space equally */
+    max-width: 300px;
+    /* Set a maximum width for each column to prevent them from becoming too wide */
+    margin-bottom: 20px;
+    align-self: top;
+}
+
+/* Style the heading in each column */
+.info-column h4 {
+    margin-bottom: 10px;
+}
+
+/* Style the list items in each column */
+.info-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-column li {
+    margin-bottom: 5px;
+}
+
+.footerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(133, 31, 60, 1);
+    color: #fff;
+    padding: 20px;
+    justify-content: space-around;
+}
+
+.footerElement {
+    display: list-item;
+}
+
+.footerSocial{
+    font-size: 2em;
+}
+
+.footer {
+    width: 100%;
+    background-color: rgba(133, 31, 60, 1);
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 30vh;
+}

@@ -1,0 +1,42 @@
+<div class="adminScreen">
+  <h1>Comentario</h1>
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="id">ID:</label>
+      <input type="text" id="id" formControlName="id" class="form-control">
+      <div *ngIf="commentForm.get('id').errors && commentForm.get('id').errors.required" class="error">
+        ID is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="userId">User:</label>
+      <input type="text" id="userId" formControlName="userId" class="form-control">
+      <div *ngIf="commentForm.get('userId').errors && commentForm.get('userId').errors.required" class="error">
+        Title is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="blogId">Blog:</label>
+      <input type="text" id="blogId" formControlName="blogId" class="form-control">
+      <div *ngIf="commentForm.get('blogId').errors && commentForm.get('blogId').errors.required" class="error">
+        Title is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="content">Content:</label>
+      <textarea id="content" formControlName="content" class="form-control"></textarea>
+      <div *ngIf="commentForm.get('content').errors && commentForm.get('content').errors.required" class="error">
+        Content is required.
+      </div>
+    </div>
+    <!-- <button type="submit" [disabled]="commentForm.invalid">Submit</button> -->
+    <div class="btn-menu">
+			<button [disabled]="commentForm.invalid" (click)="updateComment()" class="btn btn-primary btn-lg btn-action" type="button">
+				Modificar
+			</button>
+			<button [disabled]="commentForm.invalid" (click)="createComment()" class="btn btn-primary btn-lg btn-action" type="button">
+				Crear
+			</button>
+		</div>
+  </form>
+</div>

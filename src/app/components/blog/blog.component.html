@@ -1,0 +1,33 @@
+
+
+<div class="adminScreen">
+	<h1>Historial de Blogs</h1>
+    <table class="table">
+		<thead >
+			<tr>
+				<!-- <th scope="col">#</th> -->
+				<th scope="col" sortable="area" lass="col-2">Fecha</th>
+				<th scope="col" sortable="name" class="col-8">Título</th>
+				<!-- <th scope="col" sortable="population" >Modificado</th> -->
+				<th scope="col" sortable="population"  style="text-align: center;">Acción</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let blog of blogs">
+				<!-- <th scope="row">{{ blog.id }}</th> -->
+				<td>{{ blog.date }}</td>
+				<td>
+                    {{ blog.title }}
+				</td>
+				<!-- <td>{{ blog.updated_at }}</td> -->
+				<td>
+                    <div class="actionIcons">
+                        <i class="material-icons iconButton" (click)="edit(blog)">edit</i>
+                        <i class="material-icons iconButton" >delete</i>
+                        <i class="material-icons iconButton" (click)="seeComments(blog)">comment</i>
+                    </div>
+                </td>
+			</tr>
+		</tbody>
+	</table>      
+</div>
