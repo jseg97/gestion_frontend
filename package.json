@@ -8,6 +8,10 @@
     "Psicología Organizacional",
     "Talento Humano"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jseg97/gestion_frontend.git"    
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
