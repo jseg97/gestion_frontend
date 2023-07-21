@@ -1,0 +1,11 @@
+#stage 1
+FROM node:14.20-alpine as node
+WORKDIR /app
+COPY . .
+RUN npm install -force
+RUN npm run build
+
+
+#stage 2
+FROM nginx:alpine
+COPY --from=node /app/dist/tia_interno_web /usr/share/nginx/html
