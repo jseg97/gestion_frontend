@@ -21,7 +21,6 @@ import { BlogComponent, } from './blog/blog.component';
 import { UsersComponent, } from './users/users.component';
 import { BlogFormComponent, } from './blog-form/blog-form.component';
 import { CommentComponent, } from './comment/comment.component';
-import { CommentFormComponent, } from './comment-form/comment-form.component';
 import { UserFormComponent, } from './user-form/user-form.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -58,7 +57,6 @@ import { BlogEntryComponent } from './blog-entry/blog-entry.component';
         UsersComponent,
         BlogFormComponent,
         CommentComponent,
-        CommentFormComponent,
         UserFormComponent,
         HomeComponent,
         PublicBlogComponent,

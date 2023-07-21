@@ -12,7 +12,7 @@
                 <form class="form"   [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="header header-primary text-center">
                         <div class="logo-container">
-                            <img src="assets/img/now-logo.png" alt="">
+                            <img src="assets/img/logoGCForDarkBack.png" alt="">
                         </div>
                     </div>
                     <div class="content">
@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://blog.creative-tim.com">
+                        <a href="./../blog/blog.component.html">
                             Blog
                         </a>
                     </li>
@@ -79,9 +79,11 @@
             </nav>
             <div class="copyright">
                 &copy;
-              {{data | date: 'yyyy'}}, Designed by
-                <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+              {{data | date: 'yyyy'}}, 
+              <!-- Designed by
+                <a href="https://www.invisionapp.com" target="_blank">Invision</a>.  -->
+                Coded by
+                <a href="./login.component.html" target="_blank">Joan</a>.
             </div>
         </div>
     </footer>

@@ -18,7 +18,6 @@ export class CommentService {
   updateComment():Promise<Comment> {
     var url = `${environment.apiUrl}/comment`;
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     
     let body = {
       id : 3,
@@ -41,16 +40,14 @@ export class CommentService {
     return this.http.put<Comment>(url, JSON.stringify(body), options).toPromise().then(res => res as Comment);
   }
 
-  createComment():Promise<Comment> {
+  createComment(texto:any, blogId:any):Promise<Comment> {
     var url = `${environment.apiUrl}/comment`;
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
 
     let body = {
-      id : 5,
-      userId : 3,
-      content : "NUEVO COMENTARIO",
-      blogId : 3
+      userId : user.id,
+      content : texto,
+      blogId : blogId,
     };
     
 

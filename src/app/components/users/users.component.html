@@ -1,7 +1,31 @@
 
+<div class="wrapper">
+	<div class="page-header page-header-small">
+		<div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/blog-entry.jpg');">
+		</div>
+		<div class="container">
+			<div class="content-center">
+				<h1 class="title" style="visibility: hidden;">This is our great company.</h1>
+				<div class="text-center" style="visibility: hidden;">
+				  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+					<i class="fab fa-facebook-square"></i>
+				  </a>
+				  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+					<i class="fab fa-twitter"></i>
+				  </a>
+				  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+					<i class="fab fa-google-plus"></i>
+				  </a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div class="adminScreen">
-    <h1>Usuarios</h1>
+<div class="adminScreen" style="margin: 10em 8em;">
+    <div style="display: flex; justify-content: space-between;">
+		<h1>Usuarios</h1>
+		<button class="btn btn-primary" (click)="newUser()">Nuevo usuario</button>
+	</div>
     <table class="table table-striped">
 		<thead>
 			<tr>
@@ -32,4 +56,5 @@
 		</tbody>
 	</table>
       
+</div>
 </div>

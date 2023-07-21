@@ -76,35 +76,32 @@ export class NavbarComponent implements OnInit {
 
     get isAdmin() {
         
-        // console.log(this.u.role);
         if (!this.u) {
             return null;
         }
-        console.log(this.u);
+        // console.log('isAdmin'+( this.u && this.u.role === Role.Admin))
         return this.u && this.u.role === Role.Admin;
     }
 
     get isBlogAdmin() {
-        // console.log(this.u.role);
         if (!this.u) {
             return null;
         }
-        console.log(this.u);
-        
+        // console.log('isBlogAdmin'+( this.u && this.u.role === Role.BlogAdmin))
         return this.u && this.u.role === Role.BlogAdmin;
     }
 
     get isUser() {
-        // console.log(this.u.role);
         
         if (!this.u) {
             return null;
         }
-        console.log(this.u);
+        // console.log('isUser'+( this.u && this.u.role === Role.User))
         return this.u && this.u.role === Role.User;
     }
 
     get isLogged() {
+        // console.log('isLogged'+( this.u))
         return this.u ? true : false;
     }
 

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@app/components/_models';
 import { UserService } from '@app/components/_services';
 
@@ -9,54 +9,68 @@ import { UserService } from '@app/components/_services';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, OnDestroy {
   user : User;
   userForm : FormGroup;
-  constructor(private userService : UserService, private router: ActivatedRoute, private formBuilder : FormBuilder ) { }
-
-  ngOnInit(): void {
-    console.log("Todo OK");
-    this.router.params.subscribe(params => {
-      this.user = JSON.parse(params['user']);
-      console.log("Usuario LLEGO A FORM->");
+  constructor(private userService : UserService, private route: ActivatedRoute, private formBuilder : FormBuilder, private router : Router ) { 
+    if(localStorage.getItem("userUpdate")){
+      this.user = JSON.parse(localStorage.getItem("userUpdate"));
       console.log(this.user);
-      // Perform any additional actions with the received data
-    });
+      localStorage.removeItem("userUpdate");     
+    }
 
     this.userForm = this.formBuilder.group({
-      id: ['', Validators.required],
+      id: 'This is a hidden',
       username: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['',[Validators.required, Validators.email]],
       role: ['', Validators.required]
     });
 
-    this.patchForm();
+    
 
+    
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {         
+      // Perform any additional actions with the received data
+
+      var navbar = document.getElementsByTagName('nav')[0];
+      navbar.classList.add('navbar-transparent');
+    });
+    this.patchForm();
   }
 
   
 
-  onSubmit(){
-    console.log("Todo OK");
-    this.updateUser();
-    
+  onSubmit(){    
   }
 
-  async updateUser(){
-    this.user = await this.userService.updateUser();
-    console.log(this.user);
+  async updateUser(){    
+    this.user = await this.userService.updateUser(this.userForm.value);
+    this.router.navigate(['users']);
   }
 
   async createUser(){
-    this.user = await this.userService.createUser();
-    console.log(this.user);
+    let created;
+    created = await this.userService.createUser(this.userForm.value);
+    setTimeout(() => {
+      this.router.navigate(['users']);
+    }, 1000);
+    
   }
 
   patchForm() {
     this.userForm.patchValue(this.user);
   }
 
-  
+  ngOnDestroy(){
+    var navbar = document.getElementsByTagName('nav')[0];
+    navbar.classList.remove('navbar-transparent');
+    // var body = document.getElementsByTagName('body')[0];
+    // body.classList.remove('index-page');
+}
+
 }

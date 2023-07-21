@@ -14,38 +14,60 @@ import { Observable } from 'rxjs';
 export class BlogComponent implements OnInit {
   botonCrear = new FormControl("");
   blogs: Blog[] = [];
-  published : Date;
-  bl : any[] = [];
+  published: Date;
+  bl: any[] = [];
 
-  constructor( private blogService: BlogService, private router: Router, private datePipe: DatePipe) { }
+  constructor(private blogService: BlogService, private router: Router, private datePipe: DatePipe) { }
 
   ngOnInit() {
-    this.getBlogs();   
-    
+    this.getBlogs();
+    var navbar = document.getElementsByTagName('nav')[0];
+    navbar.classList.add('navbar-transparent');
+
   }
 
   onSubmit() {
 
-    
+
   }
 
-  async getBlogs() {    
+  async getBlogs() {
     this.blogs = await this.blogService.getAll();
-    
-    this.blogs = this.blogs.map(blog =>{
-      blog.date =this.datePipe.transform(blog.created_at, 'MMMM dd y')
+
+    this.blogs = this.blogs.map(blog => {
+      blog.date = this.datePipe.transform(blog.created, 'MMMM dd y')
+      console.log("DATEEEEE");
+      console.log(blog.date);
+      
       return blog;
-    });       
+    });
   }
 
-  edit(bl) : void {
-    let blog = this.blogs.find(blog =>{
+  edit(bl): void {
+    let blog = this.blogs.find(blog => {
       return blog.id === bl.id;
     })
     this.router.navigate(['manage/blogs/form/', JSON.stringify(blog)]);
   }
 
-  seeComments(blog : Blog) : void {
+  seeComments(blog: Blog): void {
     this.router.navigate(['manage/comments/', JSON.stringify(blog)]);
+  }
+
+  inactive(blog: Blog): void {
+    blog.user_updated = JSON.parse(localStorage.getItem('user')).id;
+    this.blogService.disableBlog(blog)
+    this.router.navigate(['manage/comments/', JSON.stringify(blog)]);
+  }
+
+  ngOnDestroy() {
+    var navbar = document.getElementsByTagName('nav')[0];
+    navbar.classList.remove('navbar-transparent');
+    // var body = document.getElementsByTagName('body')[0];
+    // body.classList.remove('index-page');
+  }
+
+  newBlog() {
+    this.router.navigate(['manage/blogs/form/']);
   }
 }

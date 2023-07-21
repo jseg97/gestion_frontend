@@ -1,4 +1,26 @@
-<div class="adminScreen">
+
+<div class="wrapper">
+  <div class="page-header page-header-small">
+      <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/blog-entry.jpg');">
+      </div>
+      <div class="container">
+          <div class="content-center">
+              <h1 class="title" style="visibility: hidden;">This is our great company.</h1>
+              <div class="text-center" style="visibility: hidden;">
+                <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                  <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                  <i class="fab fa-google-plus"></i>
+                </a>
+              </div>
+          </div>
+      </div>
+  </div>
+<div class="adminScreen" style="margin: 10em 8em;">
   <h1>Blog</h1>
   <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
@@ -15,6 +37,15 @@
           blogForm.get('title').errors && blogForm.get('title').errors.required
         " class="error">
         Title is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" id="description" formControlName="description" class="form-control" />
+      <div *ngIf="
+          blogForm.get('description').errors && blogForm.get('description').errors.required
+        " class="error">
+        Description is required.
       </div>
     </div>
     <div class="form-group">
@@ -37,4 +68,5 @@
 			</button>
 		</div>
   </form>
+</div>
 </div>

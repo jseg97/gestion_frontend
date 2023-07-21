@@ -2,8 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Rellax from 'rellax';
 import { BlogService } from '../_services/blog.service';
 import { ActivatedRoute } from '@angular/router';
-import { Blog } from '../_models';
+import { Blog, Comment } from '../_models';
 import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommentService } from '../_services/comment.service';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-blog-entry',
@@ -11,17 +15,24 @@ import { Observable } from 'rxjs';
   styleUrls: ['./blog-entry.component.css']
 })
 export class BlogEntryComponent implements OnInit, OnDestroy {
+  commentForm: FormGroup;
   id : any;
   blog:Blog;
   data : Date = new Date();
+  text : string='';
   focus;
   focus1;
+  x: any
+  comments : Comment[];
 
-  constructor(private blogService : BlogService, private route : ActivatedRoute) { 
-    let x = this.route.snapshot.paramMap.get('id');
-    console.log(x);
-    this.getBlogById(parseInt(x))
-    
+
+
+  constructor(private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
+    this.x = this.route.snapshot.paramMap.get('id');
+    this.getBlogById(parseInt(this.x))
+    this.commentForm = this.formBuilder.group({
+      content: '',
+    });
     
   }
 
@@ -34,6 +45,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
     body.classList.add('landing-page');
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
+    this.getComments();
   }
   
   ngOnDestroy(){
@@ -45,7 +57,21 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
   async getBlogById(id: number) {
     this.blog = await this.blogService.getById(id);
-    console.log(this.blog);
+  }
+
+  comment(){
+    console.log(this.commentForm.get('content').value)
+    this.commentService.createComment(this.commentForm.get('content').value,this.x);
+  }
+
+  async getComments() {
+    this.comments = await this.commentService.getAll();
+
+    this.comments = this.comments.map(comment => {
+      comment.created = this.datePipe.transform(comment.created, 'MMMM dd y')
+      return comment;
+    });
+    console.log(this.comments);
   }
 
 }

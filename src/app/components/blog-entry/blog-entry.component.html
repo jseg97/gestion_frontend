@@ -1,38 +1,41 @@
 <div class="wrapper">
     <div class="page-header page-header-small">
-        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/blog-entry.jpg');">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+            style="background-image: url('assets/img/blog-entry.jpg');">
         </div>
         <div class="container">
             <div class="content-center">
                 <h1 class="title" style="visibility: hidden;">This is our great company.</h1>
                 <div class="text-center" style="visibility: hidden;">
-                  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-                    <i class="fab fa-facebook-square"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-                    <i class="fab fa-google-plus"></i>
-                  </a>
+                    <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                        <i class="fab fa-facebook-square"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                        <i class="fab fa-google-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section section-about-us">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 ml-auto mr-auto text-center">
-                    <h2 class="title">{{blog.title}}</h2>
-                    <h5 class="description">{{blog.description}}</h5>
-                </div>
-            </div>
-            <div class="separator separator-primary"></div>
-            <div class="section-story-overview">
+
+    <div *ngIf="blog">
+        <div class="section section-about-us">
+            <div class="container">
                 <div class="row">
-                    <div class="col" id="htmlBlogContent">
-                        {{blog.content}}
-                        <!-- <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">{{blog.title}}</h2>
+                        <h5 class="description">{{blog.description}}</h5>
+                    </div>
+                </div>
+                <div class="separator separator-primary"></div>
+                <div class="section-story-overview">
+                    <div class="row">
+                        <div class="col" id="htmlBlogContent">
+                            {{blog.content}}
+                            <!-- <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
                         <p>The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever happens with climate change. Even if the Arctic continues to be one of the fastest-warming regions of the world, it will always be plunged into bitterly cold polar dark every winter. And year-by-year, for all kinds of natural reasons, there’s huge variety of the state of the ice.
                         </p>
                         <p>
@@ -40,49 +43,121 @@
                         </p>
                         <p>The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever happens with climate change. Even if the Arctic continues to be one of the fastest-warming regions of the world, it will always be plunged into bitterly cold polar dark every winter. And year-by-year, for all kinds of natural reasons, there’s huge variety of the state of the ice.
                         </p> -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="section">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <section class="content-item" id="comments">
+                <div class="container">
+                    <div class="row" style="justify-content: center;">
+                        <div class="col-sm-8">
+                            <form [formGroup]="commentForm">
+                                <h3 class="pull-left">New Comment</h3>
+                                <button type="submit" (click)="comment()"
+                                    class="btn btn-normal pull-right">Submit</button>
+                                <fieldset id="content">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-lg-2 hidden-xs">
+                                            <img class="img-responsive" src="./../../../assets/img/default-avatar.png"
+                                                alt="">
+                                        </div>
+                                        <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                            <textarea class="form-control" formControlName="content" id="message"
+                                                placeholder="Your message"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+
+                            <h3>4 Comments</h3>
+
+                            <!-- COMMENT 1 - START -->
+                            <div *ngFor="let com of comments">
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img class="media-object"
+                                            src="./../../../assets/img/default-avatar.png" alt=""></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{com.first_name}}</h4>
+                                        <p>{{com.content}}</p>
+                                        <ul class="list-unstyled list-inline media-detail pull-left">
+                                            <li><i class="fa fa-calendar"></i>{{com.created}}</li>
+                                            <!-- <li><i class="fa fa-thumbs-up"></i>13</li> -->
+                                        </ul>
+                                        <ul class="list-unstyled list-inline media-detail pull-right">
+                                            <!-- <li class=""><a href="">Like</a></li>
+                            <li class=""><a href="">Reply</a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- COMMENT 1 - END -->
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
-    <div class="section section-team text-center">
+    <!-- <div class="section section-team text-center">
         <div class="container">
             <h2 class="title">Here is our team</h2>
             <div class="team">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="team-player">
-                            <img src="assets/img/avatar.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                            <img src="assets/img/avatar.jpg" alt="Thumbnail Image"
+                                class="rounded-circle img-fluid img-raised">
                             <h4 class="title">Romina Hadid</h4>
                             <p class="category text-primary">Model</p>
-                            <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                                <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-instagram"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-facebook-square"></i></a>
+                            <p class="description">You can write here details about one of your team members. You can
+                                give more details about what they do. Feel free to add some
+                                <a href="#">links</a> for people to be able to follow them outside the site.
+                            </p>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-facebook-square"></i></a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="team-player">
-                            <img src="assets/img/ryan.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                            <img src="assets/img/ryan.jpg" alt="Thumbnail Image"
+                                class="rounded-circle img-fluid img-raised">
                             <h4 class="title">Ryan Tompson</h4>
                             <p class="category text-primary">Designer</p>
-                            <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                                <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-linkedin"></i></a>
+                            <p class="description">You can write here details about one of your team members. You can
+                                give more details about what they do. Feel free to add some
+                                <a href="#">links</a> for people to be able to follow them outside the site.
+                            </p>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-linkedin"></i></a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="team-player">
-                            <img src="assets/img/eva.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                            <img src="assets/img/eva.jpg" alt="Thumbnail Image"
+                                class="rounded-circle img-fluid img-raised">
                             <h4 class="title">Eva Jenner</h4>
                             <p class="category text-primary">Fashion</p>
-                            <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                                <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google-plus"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-youtube"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
+                            <p class="description">You can write here details about one of your team members. You can
+                                give more details about what they do. Feel free to add some
+                                <a href="#">links</a> for people to be able to follow them outside the site.
+                            </p>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-google-plus"></i></a>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-youtube"></i></a>
+                            <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
+                                    class="fab fa-twitter"></i></a>
                         </div>
                     </div>
                 </div>
@@ -95,24 +170,27 @@
             <p class="description">Your project is very important to us.</p>
             <div class="row">
                 <div class="col-lg-6 text-center col-md-8 ml-auto mr-auto">
-                  <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus===true}">
-                    <div class="input-group-prepend" >
-                      <span class="input-group-text">
-                          <i class="now-ui-icons users_circle-08"></i>
-                      </span>
+                    <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="now-ui-icons users_circle-08"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Left Font Awesome Icon"
+                            (focus)="focus=true" (blur)="focus=false">
                     </div>
-                      <input type="text" class="form-control" placeholder="Left Font Awesome Icon" (focus)="focus=true" (blur)="focus=false">
-                  </div>
-                  <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus1===true}">
-                    <div class="input-group-prepend" >
-                      <span class="input-group-text">
-                            <i class="now-ui-icons ui-1_email-85"></i>
-                      </span>
+                    <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="now-ui-icons ui-1_email-85"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Left Font Awesome Icon"
+                            (focus)="focus1=true" (blur)="focus1=false">
                     </div>
-                      <input type="text" class="form-control" placeholder="Left Font Awesome Icon" (focus)="focus1=true" (blur)="focus1=false">
-                  </div>
                     <div class="textarea-container">
-                        <textarea class="form-control" name="name" rows="4" cols="80" placeholder="Type a message..."></textarea>
+                        <textarea class="form-control" name="name" rows="4" cols="80"
+                            placeholder="Type a message..."></textarea>
                     </div>
                     <div class="send-button">
                         <a href="#pablo" class="btn btn-primary btn-round btn-block btn-lg">Send Message</a>
@@ -154,5 +232,5 @@
                 <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
             </div>
         </div>
-    </footer>
+    </footer> -->
 </div>

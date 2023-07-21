@@ -14,7 +14,6 @@ import { Role } from './components/_models';
 import { AdminComponent } from './components/admin';
 import { BlogComponent } from './components/blog';
 import { BlogFormComponent } from './components/blog-form/blog-form.component';
-import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { HomeComponent } from './components/home';
 import { UserFormComponent } from './components/user-form/user-form.component';
@@ -73,14 +72,14 @@ const routes: Routes =[
         data: { roles: [Role.BlogAdmin] }
     },
     {
-        path: 'manage/comments/:blog',
-        component: CommentComponent,
+        path: 'manage/blogs/form',
+        component: BlogFormComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.BlogAdmin] }
     },
     {
-        path: 'manage/comments/form/:comment',
-        component: CommentFormComponent,
+        path: 'manage/comments/:blog',
+        component: CommentComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.BlogAdmin] }
     },
@@ -88,13 +87,19 @@ const routes: Routes =[
         path: 'users',
         component: UsersComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin] }
+        // data: { roles: [Role.Admin, Role.BlogAdmin] }
     },
     {
         path: 'users/form/:user',
         component: UserFormComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin] }
+        // data: { roles: [Role.Admin, Role.BlogAdmin] }
+    },
+    {
+        path: 'users/form',
+        component: UserFormComponent,
+        canActivate: [AuthGuard],
+        // data: { roles: [Role.Admin] }
     },
 
     // otherwise redirect to home

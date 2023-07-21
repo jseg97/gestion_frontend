@@ -34,8 +34,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
         var rellaxHeader = new Rellax('.rellax-header');
-
-        console.log("Transparente");
         
         var navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.add('navbar-transparent');

@@ -29,15 +29,18 @@
                         <p>
                             {{blog.description}}
                         </p>
+                        <div style="display: flex; justify-content: space-between; width: 100%;">
                         <div class="user">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Outdoors-man-portrait_%28cropped%29.jpg"
+                            <img src="../../../assets/img/avatar.jpg"
                                 alt="" />
                             <div class="user-info">
-                                <h5>{{blog.userId}}</h5>
+                                <h5>{{blog.firstName}}</h5>
                                 <!-- <small>2h ago</small> -->
                                 <small>{{blog.date}}</small>
                             </div>
-                        </div>
+                        </div>                        
+                        <a [routerLink]="['blog/entry/{{blog.id}}']"><span style="padding: 8pt 0;">Ver mas</span></a>
+                      </div>
                     </div>
                 </div>
                 <!-- <div class="card">

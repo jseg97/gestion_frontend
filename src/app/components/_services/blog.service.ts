@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '@app/components/_models/blog';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -10,21 +11,22 @@ import { map } from 'rxjs/operators';
 })
 export class BlogService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router : Router) { }
 
   getAll():Promise<Blog[]> {
     var url = `${environment.apiUrl}/blog`;
     return this.http.get<Blog[]>(url).toPromise().then(res => res as Blog[]);
   }
 
-  updateBlog():Promise<Blog> {
+  updateBlog(blog:Blog): any {
     var url = `${environment.apiUrl}/blog`;
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
+
     let body = {
-      id : 3,
-      title : "TITULO MODIFICADO",
-      content : "Contenido Modifi"
+      id : blog.id,
+      title : blog.title,
+      description: blog.description,
+      content : blog.content
     };
     
 
@@ -38,18 +40,25 @@ export class BlogService {
       headers: headers,
     }
 
-    return this.http.put<Blog>(url, JSON.stringify(body), options).toPromise().then(res => res as Blog);
+    this.http.put(url, JSON.stringify(body), options).toPromise().then(res => {
+      if(res["success"]){
+        this.router.navigate(['manage/blogs/']);
+      }
+
+
+    });
   }
 
-  createBlog():Promise<Blog> {
+  createBlog(blog:Blog):any {
     var url = `${environment.apiUrl}/blog`;
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
 
     let body = {
-      id: 6,
-      title : "Nuevo BLOG --> TRAIDO DESDE LA WEB",
-      content : "Blog de Chat GPT"
+      title : blog.title,
+      description: blog.description,
+      content : blog.content,
+      created: Date.now(),
+      user_created: user.id
     };
     
 
@@ -63,10 +72,42 @@ export class BlogService {
       headers: headers,
     }
     
-    return this.http.post<Blog>(url, JSON.stringify(body), options).toPromise().then(res => res as Blog);
+    return this.http.post(url, JSON.stringify(body), options).toPromise().then(res => {
+      if(res["success"]){
+        console.log(res["data"]);
+        this.router.navigate(['manage/blogs/']);
+      }
+
+
+    });
   }
 
   getById(id: number): Promise<Blog> {
     return this.http.get<Blog>(`${environment.apiUrl}/blog/${id}`).toPromise().then(res => res as Blog);
   }
+
+  disableBlog(blog:any): any {
+    var url = `${environment.apiUrl}/blog`;
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${user.token}`,
+    });
+
+    const options = {
+      headers: headers,
+      body: JSON.stringify(blog)
+    }
+
+    this.http.delete(url, options ).toPromise().then(res => {
+      if(res["success"]){
+        this.router.navigate(['manage/blogs/']);
+      }
+
+
+    });
+  }
+
 }

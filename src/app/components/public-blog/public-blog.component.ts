@@ -24,11 +24,10 @@ export class PublicBlogComponent implements OnInit, OnDestroy {
   async getBlogs() {    
     this.blogs = await this.blogService.getAll();
     
-    this.blogs = this.blogs.map(blog =>{
-      blog.date =this.datePipe.transform(blog.created_at, 'MMMM dd y')
+    this.blogs = this.blogs.filter(x=> x.is_active === 'Y').map(blog =>{
+      blog.date =this.datePipe.transform(blog.created, 'MMMM dd y')
       return blog;
-    });
-    console.log(this.blogs);       
+    }); 
   }
 
   ngOnDestroy() {

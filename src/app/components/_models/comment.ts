@@ -3,7 +3,11 @@ export interface Comment {
     userId: number;
     content: string;
     blogId: number;
-    created_at: Date;
-    updated_at: Date;
+    created: string;
+    updated: string;
+    user_update?:number;
+    first_name?:string;
+    is_active?:string;
+
 }
 

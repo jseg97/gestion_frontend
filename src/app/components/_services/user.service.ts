@@ -16,13 +16,19 @@ export class UserService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    updateUser():Promise<User> {
+    updateUser(u:User):Promise<User> {
     var url = `${environment.apiUrl}/users`;
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     
-    let body = { id: 3, username: 'bloggerUpdate', password: 'blogger20xx', firstName: 'UpBlog', lastName: 'Bloggy', email: 'cavilesxx@gthca.com', role: "Admin" };
-    
+    let body = {
+      id: u.id,
+      username : u.username,
+      firstName : u.firstName,
+      lastName : u.lastName,
+      email: u.email,
+      role: u.role,
+      password: "123"
+    };
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -37,18 +43,17 @@ export class UserService {
     return this.http.put<User>(url, JSON.stringify(body), options).toPromise().then(res => res as User);
   }
 
-  createUser():Promise<User> {
+  async createUser(us:User):Promise<User> {
     var url = `${environment.apiUrl}/users`;
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
 
     let body = {
-      id : 5,
-      username : "nuevouser",
-      firstName : "NUEVO USER",
-      lastName : "NUEVO USER",
-      email: "Correo",
-      role: "Admin",
+      id: null,
+      username : us.username,
+      firstName : us.firstName,
+      lastName : us.lastName,
+      email: us.email,
+      role: us.role,
       password: "123"
     };
     
@@ -63,6 +68,6 @@ export class UserService {
       headers: headers,
     }
     
-    return this.http.post<User>(url, JSON.stringify(body), options).toPromise().then(res => res as User);
+    return await this.http.post(url, body, options).toPromise().then(res => res as User);
   }
 }

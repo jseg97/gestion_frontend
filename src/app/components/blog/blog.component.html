@@ -1,12 +1,37 @@
 
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/blog-entry.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title" style="visibility: hidden;">This is our great company.</h1>
+                <div class="text-center" style="visibility: hidden;">
+                  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                    <i class="fab fa-facebook-square"></i>
+                  </a>
+                  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+                    <i class="fab fa-google-plus"></i>
+                  </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="adminScreen">
-	<h1>Historial de Blogs</h1>
+<div class="adminScreen" style="margin: 10em 8em;">
+	<div style="display: flex; justify-content: space-between;">
+		<h1>Historial de Blogs</h1>
+		<button class="btn btn-primary" (click)="newBlog()">Nuevo blog</button>
+	</div>
     <table class="table">
 		<thead >
 			<tr>
 				<!-- <th scope="col">#</th> -->
 				<th scope="col" sortable="area" lass="col-2">Fecha</th>
+				<th scope="col" sortable="area" lass="col-2">Autor</th>
 				<th scope="col" sortable="name" class="col-8">Título</th>
 				<!-- <th scope="col" sortable="population" >Modificado</th> -->
 				<th scope="col" sortable="population"  style="text-align: center;">Acción</th>
@@ -17,17 +42,21 @@
 				<!-- <th scope="row">{{ blog.id }}</th> -->
 				<td>{{ blog.date }}</td>
 				<td>
+                    {{ blog.firstName }}
+				</td>
+				<td>
                     {{ blog.title }}
 				</td>
 				<!-- <td>{{ blog.updated_at }}</td> -->
 				<td>
                     <div class="actionIcons">
                         <i class="material-icons iconButton" (click)="edit(blog)">edit</i>
-                        <i class="material-icons iconButton" >delete</i>
+                        <i class="material-icons iconButton" (click)="inactive(blog)">delete</i>
                         <i class="material-icons iconButton" (click)="seeComments(blog)">comment</i>
                     </div>
                 </td>
 			</tr>
 		</tbody>
 	</table>      
+</div>
 </div>
