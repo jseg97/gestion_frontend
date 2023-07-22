@@ -39,11 +39,11 @@
                                 <small>{{blog.date}}</small>
                             </div>
                         </div>                        
-                        <a [routerLink]="['blog/entry/{{blog.id}}']"><span style="padding: 8pt 0;">Ver mas</span></a>
+                        <a [routerLink]="['/blog/entry', blog.id]"><span style="padding: 8pt 0;">Ver mas</span></a>
                       </div>
                     </div>
                 </div>
-                <!-- <div class="card">
+                <!-- <div class="card">['/blog/entry/100']
                   <div class="card-header">
                     <img src="https://images.cruisecritic.com/image/18740535/10-best-cruise-destinations-for-hot-air-balloon-rides_600x400_21.jpg" alt="" />
                   </div>

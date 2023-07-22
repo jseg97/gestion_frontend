@@ -10,11 +10,11 @@
 		<div class="info-column">
 			<h4>Información</h4>
 			<ul>
-				<li class="footerElement">Inicio</li>
-				<li class="footerElement">Quiénes Somos</li>
-				<li class="footerElement">Servicios</li>
-				<li class="footerElement">Blog</li>
-				<li class="footerElement">Contacto</li>
+				<a routerLink=""><li class="footerElement">Inicio</li></a>
+				<a routerLink="nosotros"><li class="footerElement">Quiénes Somos</li></a>
+				<a routerLink="servicios"><li class="footerElement">Servicios</li></a>
+				<a routerLink="blogs"><li class="footerElement">Blog</li></a>
+				<a routerLink="contacto"><li class="footerElement">Contacto</li></a>
 			</ul>
 		</div>
 		<div class="info-column">
@@ -28,7 +28,7 @@
 									<i class="material-icons">room</i>
 								</td>
 								<td style="padding: 0 0.5em;vertical-align: baseline;">
-									Parque Empresarial Ciudad Colón
+									<a href="https://goo.gl/maps/etvG4oHGJD8y1KoC8">Parque Empresarial Ciudad Colón</a>
 								</td>
 							</tr>
 						</tbody>
@@ -43,7 +43,7 @@
 									<i class="material-icons">mail</i>
 								</td>
 								<td style="padding: 0 0.5em;vertical-align: baseline;">
-									gestiondelcambio.ca@gmail.com
+									<a href="mailto:gestiondelcambio.ca@gmail.com">gestiondelcambio.ca@gmail.com</a>
 								</td>
 							</tr>
 						</tbody>
@@ -58,9 +58,9 @@
 									<i class="material-icons">call</i>
 								</td>
 								<td style="padding: 0 0.5em;">
-									+593 994201081
+									<a href="tel:+593994201081">+593 994201081</a>
 									<br>
-									+593 992309466
+									<a href="tel:+593992309466">+593 992309466</a>
 								</td>
 							</tr>
 						</tbody>
@@ -94,7 +94,17 @@
 						<p class="d-lg-none d-xl-none">Instagram</p>
 					</a>
 				</li>
-
+				<li class="footerSocial">
+					<a class="nav-link"
+						rel="tooltip"
+						title="Contactanos por WhatsApp"
+						data-placement="bottom"
+						href="https://wa.me/+593994201081"
+						target="_blank">
+						<i class="fab fa-whatsapp"></i>
+						<p class="d-lg-none d-xl-none">WhatsApp</p>
+					</a>
+				</li>
 			</ul>
 		</div>
         <div style="display: none;">

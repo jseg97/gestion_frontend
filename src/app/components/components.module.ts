@@ -30,6 +30,7 @@ import { PublicBlogComponent } from './public-blog/public-blog.component';
 import { OurServicesComponent } from './our-services/our-services.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { BlogEntryComponent } from './blog-entry/blog-entry.component';
+import { ContactoComponent } from './contacto/contacto.component';
 
 @NgModule({
     imports: [
@@ -62,7 +63,8 @@ import { BlogEntryComponent } from './blog-entry/blog-entry.component';
         PublicBlogComponent,
         OurServicesComponent,
         AboutUsComponent,
-        BlogEntryComponent
+        BlogEntryComponent,
+        ContactoComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
