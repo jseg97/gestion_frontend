@@ -1,0 +1,6 @@
+version: "2"
+authtoken: 2SoJFL5Ao6h0X4uBAXDx4w87BwQ_881Pe1YcnomQ8TGNW2qxf
+tunnels:
+  angularFront:
+    proto: http
+    addr: 4200
