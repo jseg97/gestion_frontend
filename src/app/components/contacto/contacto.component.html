@@ -6,34 +6,83 @@
 <div class="wrapper">
     <div class="page-header clear-filter" filter-color="purpleGC">
         <div class="page-header-image rellax-header" data-rellax-speed="-7"
-            style="background-image: url('assets/img/blog.png');">
+            style="background-image: url('assets/img/contacto.png');">
 
 
         </div>
         <div class="container title">
-            <h1 class="title">Nuestros Servicios</h1>
-            <h2>Nos enfocamos en las necesidades de nuestros clientes</h2>
+            <h1 class="title">Contáctanos</h1>
+            <!-- <h2>Nos enfocamos en las necesidades de nuestros clientes</h2> -->
         </div>
     </div>
 
     <div class="main">
-        <div class="section">
-            <div class="midContainer claret">
-                <div class="serviceContent">
-                    <div class="iconDiv"><img src="assets/img/recruitment.png" class="iconService" alt=""></div>
-                    <h2 class="phraseTitle">Reclutamiento y Seleccion</h2>
-                    <h5>Usando las mejores herramientas de reclutamiento, evaluación y selección de personal,
-                        realizamos un riguroso proceso para garantizar la incorporación del mejor talento para tu
-                        empresa, que se adapte a la cultura y metodología de trabajo, que aporte valor con su
-                        experiencia y habilidades.</h5>
+        <div class="section section-contact-us text-center">
+            <div class="container">
+                <h2 class="titleContact">¿Desea contactarnos?</h2>
+                <p class="description">Sus objetivos y proyectos son muy importante para nosotros</p>
+                <div class="row">
+                    <div class="col-lg-6 text-center col-md-8 ml-auto mr-auto">
+                      <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                        <div class="input-group-prepend" >
+                          <span class="input-group-text">
+                              <i class="now-ui-icons users_circle-08"></i>
+                          </span>
+                        </div>
+                          <input type="text" class="form-control" placeholder="Su nombre" (focus)="focus=true" (blur)="focus=false">
+                      </div>
+                      <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                        <div class="input-group-prepend" >
+                          <span class="input-group-text">
+                                <i class="now-ui-icons ui-1_email-85"></i>
+                          </span>
+                        </div>
+                          <input type="text" class="form-control" placeholder="Su correo" (focus)="focus1=true" (blur)="focus1=false">
+                      </div>
+                        <div class="textarea-container">
+                            <textarea class="form-control" name="name" rows="4" cols="80" placeholder="Escriba su mensaje..."></textarea>
+                        </div>
+                        <div class="send-button">
+                            <a href="#pablo" class="btn btn-primary btn-round btn-block btn-lg">Enviar Mensaje</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="midContainer white">
-                <div class="serviceContent">
-                    <div class="iconDiv"><img src="assets/img/outsourcing.png" class="iconService" alt=""></div>
-                    <h2 class="phraseTitle">OutSourcing</h2>
-                    <h5>Brindamos OutSourcing enfocado en temas de selección y nómina, contemplando estrategias y
-                        generando valor agregado a cada uno de los procesos.</h5>
+        </div>
+        <div class="section" style="padding: 2em 0 4em 0;">
+            <div class="socialNetworks">
+                <div>
+                    <a class="socialIcon"
+                            rel="tooltip"
+                            title="Follow us on LinkedIn"
+                            data-placement="bottom"
+                            href="https://www.linkedin.com/company/gesti%C3%B3n-cambio/"
+                            target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            <p class="d-lg-none d-xl-none">LinkedIn</p>
+                    </a>
+                </div>
+                <div>
+                    <a class="socialIcon"
+                            rel="tooltip"
+                            title="Follow us on Instagram"
+                            data-placement="bottom"
+                            href="https://www.instagram.com/gestionth.ca/"
+                            target="_blank">
+                            <i class="fab fa-instagram"></i>
+                            <p class="d-lg-none d-xl-none">Instagram</p>
+                    </a>
+                </div>
+                <div>
+                    <a class="socialIcon"
+                            rel="tooltip"
+                            title="Contactanos por WhatsApp"
+                            data-placement="bottom"
+                            href="https://wa.me/+593994201081"
+                            target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <p class="d-lg-none d-xl-none">WhatsApp</p>
+                    </a>
                 </div>
             </div>
         </div>

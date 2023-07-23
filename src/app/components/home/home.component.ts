@@ -10,37 +10,6 @@ import * as Rellax from 'rellax';
 
 @Component({ templateUrl: 'home.component.html', styleUrls: ['./home.component.css'] })
 export class HomeComponent implements OnInit, OnDestroy {
-    loading = false;
-    user: User;
-    userFromApi: User;
-
-    constructor(
-        private userService: UserService,
-        private authenticationService: AuthenticationService,
-        private renderer : Renderer2, config: NgbAccordionConfig
-    ) {
-        this.authenticationService.user.subscribe(x => this.user = x);
-        // this.user = this.authenticationService.userValue;
-        config.closeOthers = true;
-        config.type = 'info';
-    }
-
-    ngOnInit() {
-        this.loading = true;
-        // this.userService.getById(this.user.id).pipe(first()).subscribe(user => {
-        //     this.loading = false;
-        //     this.userFromApi = user;
-        // });
-
-
-        var rellaxHeader = new Rellax('.rellax-header');
-        
-        var navbar = document.getElementsByTagName('nav')[0];
-        navbar.classList.add('navbar-transparent');
-        var body = document.getElementsByTagName('body')[0];
-        body.classList.add('index-page');
-    }
-
     data : Date = new Date();
 
     page = 4;
@@ -58,6 +27,28 @@ export class HomeComponent implements OnInit, OnDestroy {
     public isCollapsed2 = true;
 
     state_icon_primary = true;
+
+    // loading = false;
+    // user: User;
+    // userFromApi: User;
+
+    constructor(private renderer : Renderer2, config: NgbAccordionConfig
+    ) {
+        config.closeOthers = true;
+        config.type = 'info';
+    }
+
+    ngOnInit() {
+        var rellaxHeader = new Rellax('.rellax-header');
+        // this.authenticationService.user.subscribe(x => this.user = x);
+        // this.user = this.authenticationService.userValue;        
+        // this.loading = true;
+        
+        var navbar = document.getElementsByTagName('nav')[0];
+        navbar.classList.add('navbar-transparent');
+        var body = document.getElementsByTagName('body')[0];
+        body.classList.add('index-page');
+    }    
 
     isWeekend(date: NgbDateStruct) {
         const d = new Date(date.year, date.month - 1, date.day);
