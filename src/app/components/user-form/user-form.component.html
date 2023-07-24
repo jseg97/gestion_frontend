@@ -1,139 +1,66 @@
-
-<div class="wrapper">
-	<div class="page-header page-header-small">
-		<div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/blog-entry.jpg');">
-		</div>
-		<div class="container">
-			<div class="content-center">
-				<h1 class="title" style="visibility: hidden;">This is our great company.</h1>
-				<div class="text-center" style="visibility: hidden;">
-				  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-					<i class="fab fa-facebook-square"></i>
-				  </a>
-				  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-					<i class="fab fa-twitter"></i>
-				  </a>
-				  <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-					<i class="fab fa-google-plus"></i>
-				  </a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container adminScreen" style="margin: 10em 8em;">
+<div class="section">
+	<div class="container adminScreen">
 		<h1>Formulario de Usuario</h1>
 		<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-			<div class="form-group">
+			<div class="form-group" *ngIf="isAdmin">
 				<label for="id">ID:</label>
-				<input type="text" id="id" formControlName="id" class="form-control" />
+				<!-- <input type="hidden" id="id" formControlName="id" class="form-control" /> -->
+				<input type="text" id="id" formControlName="id" class="form-control" disabled />
 				<div *ngIf="userForm.get('id').errors && userForm.get('id').errors.required" class="error">
 					ID is required.
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="username">User:</label>
-				<input
-					type="text"
-					id="username"
-					formControlName="username"
-					class="form-control"
-				/>
-				<div
-					*ngIf="
-						userForm.get('username').errors &&
-						userForm.get('username').errors.required
-					"
-					class="error"
-				>
-					Title is required.
+				<label for="username">Nombre de usuario <span style="color: red;">*</span></label>
+				<input type="text" id="username" formControlName="username" class="form-control" />
+				<div *ngIf="userForm.get('username').errors && userForm.get('username').errors.required && (userForm.get('username').dirty || userForm.get('username').touched)" class="error">
+					Este campo es obligatorio
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="firstName">Nombre:</label>
-				<input
-					type="text"
-					id="firstName"
-					formControlName="firstName"
-					class="form-control"
-				/>
-				<div
-					*ngIf="
-						userForm.get('firstName').errors &&
-						userForm.get('firstName').errors.required
-					"
-					class="error"
-				>
-					Title is required.
+				<label for="firstName">Nombres <span style="color: red;">*</span></label>
+				<input type="text" id="firstName" formControlName="firstName" class="form-control" />
+				<div *ngIf="userForm.get('firstName').errors && userForm.get('firstName').errors.required && (userForm.get('firstName').dirty || userForm.get('firstName').touched)" class="error">
+					Este campo es obligatorio
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="lastName">Apellido:</label>
-				<input
-					type="text"
-					id="lastName"
-					formControlName="lastName"
-					class="form-control"
-				/>
-				<div
-					*ngIf="
-						userForm.get('lastName').errors &&
-						userForm.get('lastName').errors.required
-					"
-					class="error"
-				>
-					Content is required.
+				<label for="lastName">Apellidos <span style="color: red;">*</span></label>
+				<input type="text" id="lastName" formControlName="lastName" class="form-control" />
+				<div *ngIf="userForm.get('lastName').errors && userForm.get('lastName').errors.required && (userForm.get('lastName').dirty || userForm.get('lastName').touched)" class="error">
+					Este campo es obligatorio
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="email">Email:</label>
-				<input
-					type="text"
-					id="email"
-					formControlName="email"
-					class="form-control"
-				/>
-				<div
-					*ngIf="
-						userForm.get('email').errors &&
-						userForm.get('email').errors.required
-					"
-					class="error"
-				>
-					Content is required.
+				<label for="email">Email <span style="color: red;">*</span></label>
+				<input type="text" id="email" formControlName="email" class="form-control" />
+				<div *ngIf="userForm.get('email').errors && userForm.get('email').errors.required && (userForm.get('email').dirty || userForm.get('email').touched)" class="error">
+					Este campo es obligatorio
+				</div>
+				<div *ngIf="userForm.get('email').errors && userForm.get('email').errors.email && (userForm.get('email').dirty || userForm.get('email').touched)" class="error">
+					Correo inválido
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="role">Rol:</label>
+				<label for="role">Rol <span style="color: red;">*</span></label>
 				<select class="form-control" id="role" formControlName="role">
-					<option disabled >Seleccione un Rol</option>
+					<option disabled>Seleccione un Rol</option>
 					<option value="User">User</option>
 					<option value="Admin">Admin</option>
 					<option value="BlogAdmin">Blog Administrator</option>
 				</select>
 				<!-- <input type="role" id="role" formControlName="role" class="form-control" /> -->
-				<div
-					*ngIf="
-						userForm.get('role').errors && userForm.get('role').errors.required
-					"
-					class="error"
-				>
-					Content is required.
+				<div *ngIf="userForm.get('role').errors && userForm.get('role').errors.required && (userForm.get('role').dirty || userForm.get('role').touched)" class="error">
+					Este campo es obligatorio
 				</div>
 			</div>
 			<div class="btn-menu">
-				<button
-					[disabled]="userForm.invalid"
-					(click)="updateUser()"
-					class="btn btn-primary btn-lg btn-action"
+				<button [disabled]="userForm.invalid" (click)="updateUser()" class="btn btn-primary btn-lg btn-action"
 					type="button">
 					Modificar
 				</button>
-				<button
-					[disabled]="userForm.invalid"
-					(click)="createUser()"
-					class="btn btn-primary btn-lg btn-action"
-					type="button"
-				>
+				<button [disabled]="userForm.invalid" (click)="createUser()" class="btn btn-primary btn-lg btn-action"
+					type="button">
 					Crear
 				</button>
 			</div>

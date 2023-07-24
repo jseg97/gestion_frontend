@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     private userSubject: BehaviorSubject<User>;
-    public user: Observable<User>;
+    // public user: Observable<User>;
     u : User;
 
 
