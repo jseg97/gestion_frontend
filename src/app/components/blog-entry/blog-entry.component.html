@@ -72,7 +72,7 @@
                                 </fieldset>
                             </form>
 
-                            <h3 *ngIf="comments.length">{{comments.length}} Comentarios</h3>
+                            <h3 *ngIf="comments">{{comments.length}} Comentarios</h3>
 
                             <!-- COMMENT 1 - START -->
                             <div *ngFor="let com of comments">
@@ -86,7 +86,7 @@
                                             <li><i class="fa fa-calendar"></i>{{com.created}}</li>
                                             <li><i class="fa fa-thumbs-up"></i>13</li>
                                         </ul>
-                                        <ul class="list-unstyled list-inline media-detail pull-right" >
+                                        <ul class="list-unstyled list-inline media-detail pull-right" *ngIf="(userId == com.user_create) || isBlogAdmin" >
                                             <!-- <li class=""><a href="">Like</a></li> -->
                                             <li class=""><a [routerLink]="['/manage/comments/form/', com.id]">Editar</a></li>
                                         </ul>

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Rellax from 'rellax';
 import { BlogService } from '../_services/blog.service';
 import { ActivatedRoute } from '@angular/router';
-import { Blog, Comment, User } from '../_models';
+import { Blog, Comment, Role, User } from '../_models';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../_services/comment.service';
@@ -25,6 +25,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
   x: any
   comments : Comment[];
   userLogged:User;
+  userId: number;
 
 
 
@@ -39,7 +40,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem('user'));
-    
+    this.userId = this.userLogged.id;
     var rellaxHeader = new Rellax('.rellax-header');
 
     var body = document.getElementsByTagName('body')[0];
@@ -79,21 +80,34 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
     console.log(this.comments);
   }
 
-  // get isCommentOwner(commment) {
+  get isAdmin() {
+    if (!this.userLogged) {
+      return null;
+    }
+    return this.userLogged && this.userLogged.role === Role.Admin;
+  }
 
-  //   if (!this.userLogged) {
-  //     return null;
-  //   }
-    
-  //   // const e = document.getElementById("content");
-  //   // if(this.userLogged && this.userLogged.id == this.comment.user_create){
-  //   //   e["disabled"] = false;
+  get isBlogAdmin() {
+    if (!this.userLogged) {
+      return null;
+    }
+    // console.log('isBlogAdmin'+( this.userLogged && this.userLogged.role === Role.BlogAdmin))
+    return this.userLogged && this.userLogged.role === Role.BlogAdmin;
+  }
 
-  //   // }else{
-  //   //   e["disabled"] = true;
-  //   // }
+  get isUser() {
+
+    if (!this.userLogged) {
+      return null;
+    }
+    // console.log('isUser'+( this.userLogged && this.userLogged.role === Role.User))
+    return this.userLogged && this.userLogged.role === Role.User;
+  }
+
+  get isLogged() {
+    // console.log('isLogged'+( this.userLogged))
     
-  //   return this.userLogged && this.userLogged.id == this.comment.user_create;
-  // }
+    return this.userLogged ? true : false;
+  }
 
 }
