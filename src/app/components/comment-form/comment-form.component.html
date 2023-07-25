@@ -1,0 +1,56 @@
+<div class="section">
+    <div class="container adminScreen">
+      <h1>Comentario</h1>
+      <form [formGroup]="commentForm" >
+        <div class="form-group" >
+          <label for="id">ID</label>
+          <input type="text" id="id" formControlName="id" class="form-control" disabled />
+        </div>
+        <div class="form-group" >
+          <label for="is_active">Estado</label>
+          <input type="text" id="is_active" formControlName="is_active" class="form-control" disabled />
+        </div>
+        <div class="form-group" >
+          <label for="first_name">Usuario</label>
+          <input type="text" id="first_name" formControlName="first_name" class="form-control"  disabled />
+        </div>
+        <div class="form-group">
+          <label for="content">Comentario <span style="color: red;">*</span></label>
+          <input type="text" id="content" formControlName="content" class="form-control" [disabled]="!isCommentOwner" />
+          <!-- <div *ngIf="blogForm.get('autor').errors && blogForm.get('autor').errors.required && (blogForm.get('autor').touched || blogForm.get('autor').dirty)" class="error">
+            Este campo es obligatorio
+          </div> -->
+        </div>
+        
+        <!-- <div class="form-group">
+          <label for="description">Descripción <span style="color: red;">*</span></label>
+          <input type="text" id="description" formControlName="description" class="form-control" />
+          <div *ngIf="blogForm.get('description').errors && blogForm.get('description').errors.required && (blogForm.get('description').touched || blogForm.get('description').dirty)" class="error">
+            Este campo es obligatorio
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label for="content">Contenido <span style="color: red;">*</span></label>
+          <textarea id="content" formControlName="content" class="form-control"></textarea>
+          <div *ngIf="blogForm.get('content').errors && blogForm.get('content').errors.required" class="error">
+            Este campo es obligatorio
+          </div>
+        </div> -->
+        <!-- <button type="submit" [disabled]="blogForm.invalid">Submit</button> -->
+        <div class="btn-menu">
+          <button [disabled]="commentForm.invalid" *ngIf="isInactive" (click)="activate(comment)" class="btn btn-primary btn-lg btn-action"
+            type="button">
+            Activar comentario
+          </button>
+          <button [disabled]="commentForm.invalid" *ngIf="isActive" (click)="inactivate(comment)" class="btn btn-primary btn-lg btn-action"
+            type="button">
+            Eliminar Comentario
+          </button>
+          <button [disabled]="commentForm.invalid" *ngIf="isCommentOwner" (click)="update(comment)" class="btn btn-primary btn-lg btn-action"
+            type="button">
+            Modificar Comentario
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

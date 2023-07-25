@@ -35,6 +35,7 @@
 				<th scope="col">Apellido</th>
 				<th scope="col">Email</th>
 				<th scope="col">Rol</th>
+				<th scope="col">Estado</th>
 				<th scope="col" style="text-align: center;">Accion</th>
 			</tr>
 		</thead>
@@ -46,10 +47,13 @@
 				<td>{{ user.lastName }}</td>
 				<td>{{ user.email }}</td>
 				<td>{{ user.role }}</td>
+				<td>{{ user.activo }}</td>
 				<td>
                     <div class="actionIcons">
                         <i class="material-icons iconButton" (click)="edit(user)">edit</i>
-                        <i class="material-icons iconButton" >delete</i>
+                        <i class="material-icons iconButton" *ngIf="user.is_active == 'Y'" (click)="inactivate(user)">person_off</i>
+                        <i class="material-icons iconButton" *ngIf="user.is_active == 'N'" (click)="activate(user)">person</i>
+                        <!-- <i class="material-icons iconButton" >delete</i> -->
                     </div>
                 </td>
 			</tr>

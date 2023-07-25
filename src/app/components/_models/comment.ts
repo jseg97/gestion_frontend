@@ -8,6 +8,9 @@ export interface Comment {
     user_update?:number;
     first_name?:string;
     is_active?:string;
+    activo?:string;
+    date?:string;
+    user_create?:number;
 
 }
 

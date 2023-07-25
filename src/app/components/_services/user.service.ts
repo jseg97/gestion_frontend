@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/components/_models';
@@ -27,7 +27,36 @@ export class UserService {
       lastName : u.lastName,
       email: u.email,
       role: u.role,
-      password: "123"
+      password: u.password,
+      is_active: u.is_active
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${user.token}`,
+    });
+
+    const options = {
+      headers: headers,
+    }
+
+    return this.http.put<User>(url, JSON.stringify(body), options).toPromise().then(res => res as User);
+  }
+
+  updateStatus(u:User):Promise<User> {
+    var url = `${environment.apiUrl}/users/status`;
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    let body = {
+      id: u.id,
+      username : u.username,
+      firstName : u.firstName,
+      lastName : u.lastName,
+      email: u.email,
+      role: u.role,
+      password: u.password,
+      is_active: u.is_active
     };
 
     const headers = new HttpHeaders({
@@ -54,7 +83,7 @@ export class UserService {
       lastName : us.lastName,
       email: us.email,
       role: us.role,
-      password: "123"
+      password: us.password
     };
     
 

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Rellax from 'rellax';
 import { BlogService } from '../_services/blog.service';
 import { ActivatedRoute } from '@angular/router';
-import { Blog, Comment } from '../_models';
+import { Blog, Comment, User } from '../_models';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../_services/comment.service';
@@ -24,6 +24,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
   focus1;
   x: any
   comments : Comment[];
+  userLogged:User;
 
 
 
@@ -37,7 +38,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
+    this.userLogged = JSON.parse(localStorage.getItem('user'));
     
     var rellaxHeader = new Rellax('.rellax-header');
 
@@ -57,6 +58,8 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
   async getBlogById(id: number) {
     this.blog = await this.blogService.getById(id);
+    console.log(this.blog);
+    
   }
 
   comment(){
@@ -65,7 +68,9 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
   }
 
   async getComments() {
-    this.comments = await this.commentService.getAll();
+    this.comments = await this.commentService.getFromBlogId(parseInt(this.x));
+    console.log(this.comments);
+    
 
     this.comments = this.comments.map(comment => {
       comment.created = this.datePipe.transform(comment.created, 'MMMM dd y')
@@ -73,5 +78,22 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
     });
     console.log(this.comments);
   }
+
+  // get isCommentOwner(commment) {
+
+  //   if (!this.userLogged) {
+  //     return null;
+  //   }
+    
+  //   // const e = document.getElementById("content");
+  //   // if(this.userLogged && this.userLogged.id == this.comment.user_create){
+  //   //   e["disabled"] = false;
+
+  //   // }else{
+  //   //   e["disabled"] = true;
+  //   // }
+    
+  //   return this.userLogged && this.userLogged.id == this.comment.user_create;
+  // }
 
 }

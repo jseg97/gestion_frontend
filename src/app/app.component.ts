@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
                 var _location = this.location.path();
                 _location = _location.split('/')[2];
 
+                let commentForm = !this.location.path().startsWith('/manage/comments/form');
                 let blogForm = !this.location.path().startsWith('/manage/blogs/form');
                 let userForm = !this.location.path().startsWith('/users/form/');
                 let users = !this.location.path().startsWith('/users');
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
 
                 if (number > 150 || window.pageYOffset > 150) {
                     navbar.classList.remove('navbar-transparent');
-                } else if (_location !== 'login' && this.location.path() !== '/nucleoicons' && userForm && users && admin && blogForm) {
+                } else if (_location !== 'login' && this.location.path() !== '/nucleoicons' && userForm && users && admin && blogForm && commentForm) {
                     // remove logic
                     navbar.classList.add('navbar-transparent');
                 }

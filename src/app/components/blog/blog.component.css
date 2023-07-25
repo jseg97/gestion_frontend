@@ -3,3 +3,9 @@
     display: flex;
     justify-content: center;
 }
+
+.actionIcons {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+}

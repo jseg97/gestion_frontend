@@ -10,6 +10,14 @@
 					ID is required.
 				</div>
 			</div>
+			<div class="form-group" *ngIf="isAdmin">
+				<label for="is_active">Estado:</label>
+				<!-- <input type="hidden" id="id" formControlName="id" class="form-control" /> -->
+				<input type="text" id="is_active" formControlName="is_active" class="form-control" disabled />
+				<div *ngIf="userForm.get('is_active').errors && userForm.get('is_active').errors.required" class="error">
+					Este es un campo obligatorio
+				</div>
+			</div>
 			<div class="form-group">
 				<label for="username">Nombre de usuario <span style="color: red;">*</span></label>
 				<input type="text" id="username" formControlName="username" class="form-control" />
@@ -39,6 +47,26 @@
 				</div>
 				<div *ngIf="userForm.get('email').errors && userForm.get('email').errors.email && (userForm.get('email').dirty || userForm.get('email').touched)" class="error">
 					Correo inválido
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password">Contraseña <span style="color: red;">*</span></label>
+				<input type="password" id="password" formControlName="password" class="form-control" />
+				<div *ngIf="userForm.get('password').errors && userForm.get('password').errors.required && (userForm.get('password').dirty || userForm.get('password').touched)" class="error">
+					Este campo es obligatorio
+				</div>
+				<div *ngIf="userForm.get('password').errors && userForm.get('password').errors.minLength && (userForm.get('password').dirty || userForm.get('password').touched)" class="error">
+					Mínimo 8 caracteres
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="passwordConfirmation">Confirmar Contraseña <span style="color: red;">*</span></label>
+				<input type="password" id="passwordConfirmation" formControlName="passwordConfirmation" class="form-control" />
+				<div *ngIf="userForm.get('passwordConfirmation').errors && userForm.get('passwordConfirmation').errors.required && (userForm.get('passwordConfirmation').dirty || userForm.get('passwordConfirmation').touched)" class="error">
+					Este campo es obligatorio
+				</div>
+				<div *ngIf="userForm.get('passwordConfirmation').errors && userForm.get('passwordConfirmation').errors.minLength && (userForm.get('passwordConfirmation').dirty || userForm.get('passwordConfirmation').touched)" class="error">
+					Mínimo 8 caracteres
 				</div>
 			</div>
 			<div class="form-group">

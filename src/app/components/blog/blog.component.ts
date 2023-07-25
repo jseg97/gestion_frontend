@@ -35,10 +35,10 @@ export class BlogComponent implements OnInit {
     this.blogs = await this.blogService.getAll();
 
     this.blogs = this.blogs.map(blog => {
-      blog.date = this.datePipe.transform(blog.created, 'MMMM dd y')
-      console.log("DATEEEEE");
-      console.log(blog.date);
-      
+      blog.date = this.datePipe.transform(blog.created, 'MMMM dd y');
+      if(blog.is_active == 'Y'){
+        blog.activo = "Activo";
+      }else { blog.activo = "Inactivo"; }
       return blog;
     });
   }
@@ -54,11 +54,18 @@ export class BlogComponent implements OnInit {
     this.router.navigate(['manage/comments/', JSON.stringify(blog)]);
   }
 
-  inactive(blog: Blog): void {
+  async inactive(blog: Blog){
     blog.user_updated = JSON.parse(localStorage.getItem('user')).id;
-    this.blogService.disableBlog(blog)
-    this.router.navigate(['manage/comments/', JSON.stringify(blog)]);
+    await this.blogService.disableBlog(blog);
+    location.reload();
   }
+
+  async activate(blog: Blog) {
+    blog.user_updated = JSON.parse(localStorage.getItem('user')).id;
+    await this.blogService.activateBlog(blog);
+    location.reload();
+  }
+
 
   ngOnDestroy() {
     var navbar = document.getElementsByTagName('nav')[0];

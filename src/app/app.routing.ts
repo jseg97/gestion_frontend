@@ -23,6 +23,7 @@ import { OurServicesComponent } from './components/our-services/our-services.com
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { BlogEntryComponent } from './components/blog-entry/blog-entry.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
 
 const routes: Routes =[
     // { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -87,6 +88,11 @@ const routes: Routes =[
         component: CommentComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.BlogAdmin] }
+    },
+    {
+        path: 'manage/comments/form/:id',
+        component: CommentFormComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'users',

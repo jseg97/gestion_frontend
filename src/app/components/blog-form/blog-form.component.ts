@@ -16,9 +16,10 @@ export class BlogFormComponent implements OnInit, OnDestroy {
   blog: Blog;
   userLogged: User;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private blogService: BlogService, private router: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private blogService: BlogService) { }
 
   ngOnInit() {
+    this.userLogged = JSON.parse(localStorage.getItem('user')).id;
     var rellaxHeader = new Rellax('.rellax-header');
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.remove('navbar-transparent');

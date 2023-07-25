@@ -11,4 +11,5 @@ export interface Blog {
     user_id?: number;
     user_updated?: number;
     is_active:string;
+    activo?:string;
 }

@@ -9,4 +9,6 @@ export class User {
     email: string;
     role: Role;
     token?: string;
+    is_active:string;
+    activo?:string;
 }

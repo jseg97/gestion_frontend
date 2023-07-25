@@ -1,0 +1,17 @@
+.actionIcons {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+}
+
+.blogDetail {
+    display: flex; 
+    align-items: center; 
+    justify-content: start; 
+    gap: 1rem; 
+    padding: 1.5em 0 ;
+}
+
+.blogDetail h3 {
+    margin: 0 0 0.4em 0;
+}

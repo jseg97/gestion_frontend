@@ -30,8 +30,16 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   getUsers() {
     this.userService.getAll().pipe(first()).subscribe(users => {
-      this.users = users;
+      console.log(users);
+      
+      this.users = users.map(user=>{
+        if(user.is_active == 'Y'){
+          user.activo = 'Activo';
+        }else{ user.activo = 'Inactivo';}
+        return user;
+      });
     });
+    
   }
 
   onSubmit() {
@@ -42,6 +50,18 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.router.navigate(['users/form', user]);    
   }
 
+  async activate(user: User) {
+    user.is_active='Y';
+    await this.userService.updateStatus(user);
+    location.reload();
+  }
+
+  async inactivate(user: User) {
+    user.is_active='N';
+    await this.userService.updateStatus(user);
+    location.reload();
+  }
+
   ngOnDestroy() {
     // var navbar = document.getElementsByTagName('nav')[0];
     // navbar.classList.remove('navbar-transparent');
@@ -49,8 +69,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     body.classList.remove('users');
   }
 
-  newUser() {
-    console.log("nu");    
+  newUser() {   
     this.router.navigate(['users/form', JSON.stringify({})]);
   }
 }

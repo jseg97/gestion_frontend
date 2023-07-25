@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Blog, Comment } from '@app/components/_models';
+import { Comment } from '@app/components/_models';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -15,16 +15,40 @@ export class CommentService {
     return this.http.get<Comment[]>(url).toPromise().then(res => res as Comment[]);
   }
 
-  updateComment():Promise<Comment> {
+  getFromBlogId(id:number):Promise<Comment[]> {
+    var url = `${environment.apiUrl}/comment/getFromBlog`;
+    let params = new HttpParams()
+      .set('id', id.toString());
+      
+    return this.http.get<Comment[]>(url, {params}).toPromise().then(res => res as Comment[]);
+  }
+
+  getAllFromBlogId(id:number):Promise<Comment[]> {
+    var url = `${environment.apiUrl}/comment/getAllFromBlog`;
+    let params = new HttpParams()
+      .set('id', id.toString());
+      
+    return this.http.get<Comment[]>(url, {params}).toPromise().then(res => res as Comment[]);
+  }
+
+  getById(id: number): Promise<Comment> {
+    console.log("YYY");
+    
+    return this.http.get<Comment>(`${environment.apiUrl}/comment/getByid/${id}`).toPromise().then(res => res as Comment);
+  }
+
+  updateComment(comment: Comment):Promise<Comment> {
     var url = `${environment.apiUrl}/comment`;
     const user = JSON.parse(localStorage.getItem('user'));
     
     let body = {
-      id : 3,
-      userId : 1,
-      content : "COMENTARIO MODIFICADO",
-      blogId : 1
+      id : comment.id,
+      userId : user.id,
+      content : comment.content,
+      is_active: comment.is_active
     };
+    
+    console.log(body);
     
 
     const headers = new HttpHeaders({
@@ -64,7 +88,13 @@ export class CommentService {
     return this.http.post<Comment>(url, JSON.stringify(body), options).toPromise().then(res => res as Comment);
   }
 
-  getById(id: number) {
-    return this.http.get<Comment>(`${environment.apiUrl}/users/${id}`);
+  async activateComment(comment:any) {
+    comment.is_active = 'Y';
+    await this.updateComment(comment);
+  }
+
+  async inactivateComment(comment:any) {
+    comment.is_active = 'N';
+    await this.updateComment(comment);
   }
 }

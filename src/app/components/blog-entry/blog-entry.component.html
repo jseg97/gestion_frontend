@@ -57,7 +57,7 @@
                             <form [formGroup]="commentForm">
                                 <h3 class="pull-left">New Comment</h3>
                                 <button type="submit" (click)="comment()"
-                                    class="btn btn-normal pull-right">Submit</button>
+                                    class="btn btn-normal pull-right">Publicar</button>
                                 <fieldset id="content">
                                     <div class="row">
                                         <div class="col-sm-3 col-lg-2 hidden-xs">
@@ -72,7 +72,7 @@
                                 </fieldset>
                             </form>
 
-                            <h3>4 Comments</h3>
+                            <h3 *ngIf="comments.length">{{comments.length}} Comentarios</h3>
 
                             <!-- COMMENT 1 - START -->
                             <div *ngFor="let com of comments">
@@ -84,19 +84,17 @@
                                         <p>{{com.content}}</p>
                                         <ul class="list-unstyled list-inline media-detail pull-left">
                                             <li><i class="fa fa-calendar"></i>{{com.created}}</li>
-                                            <!-- <li><i class="fa fa-thumbs-up"></i>13</li> -->
+                                            <li><i class="fa fa-thumbs-up"></i>13</li>
                                         </ul>
-                                        <ul class="list-unstyled list-inline media-detail pull-right">
-                                            <!-- <li class=""><a href="">Like</a></li>
-                            <li class=""><a href="">Reply</a></li> -->
+                                        <ul class="list-unstyled list-inline media-detail pull-right" >
+                                            <!-- <li class=""><a href="">Like</a></li> -->
+                                            <li class=""><a [routerLink]="['/manage/comments/form/', com.id]">Editar</a></li>
                                         </ul>
                                     </div>
+
                                 </div>
                             </div>
                             <!-- COMMENT 1 - END -->
-
-
-
                         </div>
                     </div>
                 </div>

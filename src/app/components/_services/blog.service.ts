@@ -26,7 +26,10 @@ export class BlogService {
       id : blog.id,
       title : blog.title,
       description: blog.description,
-      content : blog.content
+      content : blog.content,
+      updated: Date.now(),
+      user_updated: user.id,
+      is_active: blog.is_active
     };
     
 
@@ -86,7 +89,7 @@ export class BlogService {
     return this.http.get<Blog>(`${environment.apiUrl}/blog/${id}`).toPromise().then(res => res as Blog);
   }
 
-  disableBlog(blog:any): any {
+  async disableBlog(blog:any){
     var url = `${environment.apiUrl}/blog`;
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -108,6 +111,11 @@ export class BlogService {
 
 
     });
+  }
+
+  async activateBlog(blog:any) {
+    blog.is_active = 'Y';
+    await this.updateBlog(blog);
   }
 
 }
