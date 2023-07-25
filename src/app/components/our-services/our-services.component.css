@@ -21,7 +21,8 @@ h2 {
 }
 
 .midContainer.white {
-    background-color: #ffffff;
+    background-color: #f2f2f229;
+    /* background-color: #ffffff; */
     color: #851f3c;
 }
 
@@ -65,6 +66,89 @@ h2 {
     margin-bottom: 2.2em;
 }
 
+.iconServices {
+    display: flex;
+    justify-content: space-around;
+    padding: 4em 0;
+    align-items: baseline;
+}
+
 .iconService {
     width: 25%;
+}
+
+.iconService.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    
+}
+
+.iconWrapper{
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.iconServ{
+    text-align: center;
+}
+
+.iconDescription{
+    width: 60%;
+    text-align: center;
+}
+
+.mobileOrder {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .title {
+        font-size: 1.7em;
+        align-items: center;
+    }
+
+    .title h2 {
+        font-size: 1.2em;
+    }
+
+    .iconServices {
+        flex-direction: column;
+        gap: 2em;
+    }
+
+    .iconWrapper{
+        width: 100%;
+    }
+
+    .serviceBoxes{
+        flex-direction: column;
+    }
+
+    .midContainer{
+        width: 100%;
+    }
+
+    .webOrder {
+        display: none;
+    }
+
+    .mobileOrder {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1366px) {
+    
+}
+
+
+@media only screen and (min-width: 1366px) and (max-width: 2400px) {
+    
 }
