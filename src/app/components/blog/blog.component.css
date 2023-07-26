@@ -9,3 +9,8 @@
     gap: 1em;
     justify-content: center;
 }
+
+
+.iconButton {
+    cursor: pointer;
+}
