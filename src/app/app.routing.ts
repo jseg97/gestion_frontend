@@ -69,7 +69,7 @@ const routes: Routes =[
         path: 'manage/blogs',
         component: BlogComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.BlogAdmin] }
+        data: { roles: [Role.BlogAdmin, Role.Admin] }
     },
     {
         path: 'manage/blogs/form/:blog',

@@ -50,9 +50,9 @@
 				<td>{{ user.activo }}</td>
 				<td>
                     <div class="actionIcons">
-                        <i class="material-icons iconButton" (click)="edit(user)">edit</i>
-                        <i class="material-icons iconButton" *ngIf="user.is_active == 'Y'" (click)="inactivate(user)">person_off</i>
-                        <i class="material-icons iconButton" *ngIf="user.is_active == 'N'" (click)="activate(user)">person</i>
+                        <i class="material-icons iconButton" title="Editar usuario" (click)="edit(user)">edit</i>
+                        <i class="material-icons iconButton hoverMostrar" title="Inactivar Usuario" *ngIf="user.is_active == 'Y'" (click)="inactivate(user)"></i>
+                        <i class="material-icons iconButton hoverOcultar" title="Activar Usuario" *ngIf="user.is_active == 'N'" (click)="activate(user)"></i>
                         <!-- <i class="material-icons iconButton" >delete</i> -->
                     </div>
                 </td>
