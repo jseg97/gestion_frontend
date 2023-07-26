@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { QuillModule } from 'ngx-quill';
 @NgModule({
     declarations: [
         AppComponent,
@@ -24,7 +26,9 @@ import { FooterComponent } from './shared/footer/footer.component';
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
-        ExamplesModule
+        ExamplesModule,
+        RichTextEditorModule,
+        QuillModule.forRoot()
         
     ],
     providers: [],

@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jseg97/gestion_frontend.git"    
+    "url": "https://github.com/jseg97/gestion_frontend.git"
   },
   "scripts": {
     "ng": "ng",
@@ -39,6 +39,8 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@ng-bootstrap/ng-bootstrap": "6.0.0",
+    "@syncfusion/ej2-angular-richtexteditor": "^22.1.39",
+    "@types/quill": "^2.0.10",
     "ajv": "7.0.0",
     "ajv-keywords": "4.0.0",
     "bootstrap": "4.5.3",
@@ -48,12 +50,14 @@
     "jquery": "3.5.1",
     "jw-bootstrap-switch-ng2": "2.0.5",
     "ng2-nouislider": "1.8.2",
+    "ngx-quill": "^19.0.0",
     "nouislider": "14.6.3",
     "popper.js": "1.16.1",
+    "quill": "^1.3.7",
     "rellax": "1.12.1",
     "rxjs": "~7.5.0",
-    "zone.js": "~0.11.4",
-    "web-animations-js": "2.3.2"
+    "web-animations-js": "2.3.2",
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^14.1.0",
