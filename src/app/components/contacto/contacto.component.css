@@ -4,11 +4,11 @@ h2 {
 
 .title {
     display: flex;
-    font-size: 80px;
+    font-size: 2.5em;
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    padding: 2em 0 0 0;
+    padding: 3em 0 0 0;
 }
 
 .titleContact {
@@ -52,4 +52,38 @@ h2 {
 
 .info-column li {
     margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+    
+    .title {
+        font-size: 1.7em;
+        align-items: center;
+    }
+
+    .socialNetworks {
+        /* flex-direction: column; */
+        align-items: center;
+        padding: 0;
+        gap: 4em;
+        font-size: 0.7em;
+    }
+
+    .snName {
+        font-size: 0.35em;
+    }
+
+    .socialIcon i{
+        margin-left: 0.5em;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .socialNetworks {
+        gap: 1em;
+    }
+}
+
+
+@media only screen and (min-width: 1366px) and (max-width: 2400px) {
 }
