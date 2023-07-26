@@ -59,21 +59,21 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
   }
-  
 
-  samePassword(){
+
+  samePassword() {
     let p1 = this.userForm.get("password");
     let p2 = this.userForm.get("passwordConfirmation")
 
     // console.log(p1.value);
     //   console.log(p2.value);
-    if(p1.value === p2.value){     
+    if (p1.value === p2.value) {
       return true
-    }else{
+    } else {
       p1.reset();
       p2.reset();
       return false;
-    } 
+    }
   }
 
   async updateUser() {
@@ -83,19 +83,18 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   async createUser() {
     let created;
-    if(this.samePassword()){
-      console.log("ok")
-      // alert("Contraseñas coinciden")
-      // created = await this.userService.createUser(this.userForm.value);
-      created = await this.userService.createUser(this.userForm.value);
-      this.router.navigate(['users']);      
-    }else{
+    if (this.samePassword()) {
+      this.userService.createUser(this.userForm.value).then(res => {
+        if (res['success']) {
+          this.router.navigate(['users']);
+        } else {
+          alert("Error durante la creación");
+        }
+      });
+    } else {
       console.log("error")
       alert("Contraseñas no coinciden")
     }
-    // created = await this.userService.createUser(this.userForm.value);
-    
-
   }
 
   patchForm() {
@@ -136,7 +135,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   get isLogged() {
     // console.log('isLogged'+( this.userLogged))
-    
+
     return this.userLogged ? true : false;
   }
 

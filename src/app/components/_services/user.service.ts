@@ -72,7 +72,7 @@ export class UserService {
     return this.http.put<User>(url, JSON.stringify(body), options).toPromise().then(res => res as User);
   }
 
-  async createUser(us:User):Promise<User> {
+  async createUser(us:User):Promise<any> {
     var url = `${environment.apiUrl}/users`;
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -83,7 +83,8 @@ export class UserService {
       lastName : us.lastName,
       email: us.email,
       role: us.role,
-      password: us.password
+      password: us.password,
+      is_active: 'Y'
     };
     
 
@@ -97,6 +98,8 @@ export class UserService {
       headers: headers,
     }
     
-    return await this.http.post(url, body, options).toPromise().then(res => res as User);
+    return this.http.post(url, body, options).toPromise().then(res => {
+      return res;
+    });
   }
 }

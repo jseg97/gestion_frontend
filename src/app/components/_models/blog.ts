@@ -12,4 +12,5 @@ export interface Blog {
     user_updated?: number;
     is_active:string;
     activo?:string;
+    commentCount?: number;
 }

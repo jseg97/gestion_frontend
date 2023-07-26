@@ -30,16 +30,13 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   getUsers() {
     this.userService.getAll().pipe(first()).subscribe(users => {
-      console.log(users);
-      
       this.users = users.map(user=>{
         if(user.is_active == 'Y'){
           user.activo = 'Activo';
         }else{ user.activo = 'Inactivo';}
         return user;
       });
-    });
-    
+    });    
   }
 
   onSubmit() {
