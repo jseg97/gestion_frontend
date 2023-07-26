@@ -68,6 +68,8 @@ export class CommentService {
     var url = `${environment.apiUrl}/comment`;
     const user = JSON.parse(localStorage.getItem('user'));
 
+    if(user == null) return null;
+
     let body = {
       userId : user.id,
       content : texto,
