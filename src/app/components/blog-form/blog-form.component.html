@@ -22,8 +22,10 @@
       </div>
       <div class="form-group">
         <label for="content">Contenido <span style="color: red;">*</span></label>
-        <textarea id="content" formControlName="content" class="form-control"></textarea>
-        <div *ngIf="blogForm.get('content').errors && blogForm.get('content').errors.required" class="error">
+        <quill-editor formControlName="content" class="form-control"></quill-editor>
+    <!--     <app-rich-text-input id="content" formControlName="content" [className]="'form-control'"></app-rich-text-input> -->
+        <!-- <textarea id="content" formControlName="content" class="form-control"></textarea> -->
+        <div *ngIf="blogForm.get('content').errors && blogForm.get('content').errors.required " class="error">
           Este campo es obligatorio
         </div>
       </div>

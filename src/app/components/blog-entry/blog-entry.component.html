@@ -33,8 +33,8 @@
                 <div class="separator separator-primary"></div>
                 <div class="section-story-overview">
                     <div class="row">
-                        <div class="col" id="htmlBlogContent">
-                            {{blog.content}}
+                        <div class="col" id="htmlBlogContent" [innerHTML]="blog.content">
+                            
                             <!-- <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
                         <p>The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever happens with climate change. Even if the Arctic continues to be one of the fastest-warming regions of the world, it will always be plunged into bitterly cold polar dark every winter. And year-by-year, for all kinds of natural reasons, there’s huge variety of the state of the ice.
                         </p>
@@ -232,3 +232,4 @@
         </div>
     </footer> -->
 </div>
+

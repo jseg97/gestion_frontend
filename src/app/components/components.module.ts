@@ -33,6 +33,9 @@ import { BlogEntryComponent } from './blog-entry/blog-entry.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { ModalErrorComponent } from './modal-error/modal-error.component';
+import { RichTextInputComponent } from './rich-text-input/rich-text-input.component';
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
     imports: [
@@ -44,7 +47,9 @@ import { ModalErrorComponent } from './modal-error/modal-error.component';
         NgbModule,
         NouisliderModule,
         RouterModule,
-        JwBootstrapSwitchNg2Module
+        JwBootstrapSwitchNg2Module,
+        RichTextEditorModule,
+        QuillModule.forRoot()
       ],
     declarations: [
         ComponentsComponent,
@@ -68,7 +73,8 @@ import { ModalErrorComponent } from './modal-error/modal-error.component';
         BlogEntryComponent,
         ContactoComponent,
         CommentFormComponent,
-        ModalErrorComponent
+        ModalErrorComponent,
+        RichTextInputComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
