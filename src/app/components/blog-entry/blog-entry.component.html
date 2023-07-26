@@ -34,7 +34,7 @@
                 <div class="section-story-overview">
                     <div class="row">
                         <div class="col" id="htmlBlogContent" [innerHTML]="blog.content">
-                            
+
                             <!-- <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
                         <p>The Arctic Ocean freezes every winter and much of the sea-ice then thaws every summer, and that process will continue whatever happens with climate change. Even if the Arctic continues to be one of the fastest-warming regions of the world, it will always be plunged into bitterly cold polar dark every winter. And year-by-year, for all kinds of natural reasons, there’s huge variety of the state of the ice.
                         </p>
@@ -79,19 +79,26 @@
                                 <div class="media">
                                     <a class="pull-left" href="#"><img class="media-object"
                                             src="./../../../assets/img/default-avatar.png" alt=""></a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">{{com.first_name}}</h4>
-                                        <p>{{com.content}}</p>
-                                        <ul class="list-unstyled list-inline media-detail pull-left">
-                                            <li><i class="fa fa-calendar"></i>{{com.created}}</li>
-                                            <li><i class="fa fa-thumbs-up"></i>13</li>
-                                        </ul>
-                                        <ul class="list-unstyled list-inline media-detail pull-right" *ngIf="(userId == com.user_create) || isBlogAdmin" >
-                                            <!-- <li class=""><a href="">Like</a></li> -->
-                                            <li class=""><a [routerLink]="['/manage/comments/form/', com.id]">Editar</a></li>
-                                        </ul>
-                                    </div>
-
+                                    <form [formGroup]="commentForm">
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{com.first_name}}</h4>
+                                            <div>
+                                                <p *ngIf="editCommentId !== com.id">{{ com.content }}</p>
+                                                <textarea *ngIf="editCommentId === com.id" class="form-control"
+                                                    formControlName="content" id="message"></textarea>
+                                            </div>
+                                            <ul class="list-unstyled list-inline media-detail pull-left">
+                                                <li><i class="fa fa-calendar"></i>{{com.created}}</li>
+                                                <li><i class="fa fa-thumbs-up"></i>13</li>
+                                            </ul>
+                                            <ul class="list-unstyled list-inline media-detail pull-right"
+                                                *ngIf="(userId == com.user_create) || isBlogAdmin">
+                                                <li class=""><a (click)="editComment(com.id)">Editar</a></li>
+                                                <li class=""><a (click)="saveCommentChanges(com)"
+                                                        *ngIf="editCommentId === com.id">Guardar</a></li>
+                                            </ul>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- COMMENT 1 - END -->
@@ -232,4 +239,3 @@
         </div>
     </footer> -->
 </div>
-

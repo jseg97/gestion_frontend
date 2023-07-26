@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Rellax from 'rellax';
 import { BlogService } from '../_services/blog.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Blog, Comment, Role, User } from '../_models';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -28,10 +28,11 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
   comments : Comment[];
   userLogged:User;
   userId: number;
+  editCommentId: number | null = null;
 
 
 
-  constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
+  constructor(private modalService: NgbModal,private router : Router,private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
     this.x = this.route.snapshot.paramMap.get('id');
     this.getBlogById(parseInt(this.x))
     this.commentForm = this.formBuilder.group({
@@ -50,6 +51,26 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
     this.getComments();
+  }
+
+  editComment(commentId: number) {
+    this.editCommentId = commentId;
+    const comment = this.comments.find((com) => com.id === commentId);
+    if (comment) {
+      this.commentForm.patchValue({ content: comment.content });
+    }
+  }
+
+  saveCommentChanges(commentId: Comment) {
+    commentId.content = this.commentForm.get('content').value;
+    this.commentService.updateComment(commentId).then(() => {
+      this.editCommentId = null;
+      this.commentForm.reset();
+      this.getComments();
+      //this.router.navigate(['blog/entry/', JSON.stringify(commentId.blogId)]);
+    });
+
+    
   }
   
   ngOnDestroy(){
