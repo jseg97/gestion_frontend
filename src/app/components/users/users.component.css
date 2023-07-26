@@ -28,3 +28,7 @@
 .material-icons.hoverOcultar:hover::before{
     content: "person";
 }
+
+.table th, .table td { 
+    vertical-align: middle;
+}

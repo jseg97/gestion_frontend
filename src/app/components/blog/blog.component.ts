@@ -21,9 +21,11 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     this.getBlogs();
-    var navbar = document.getElementsByTagName('nav')[0];
-    navbar.classList.add('navbar-transparent');
 
+    var navbar = document.getElementsByTagName('nav')[0];
+    navbar.classList.remove('navbar-transparent');
+    var body = document.getElementsByTagName('body')[0];
+    body.classList.add('blogs-list');
   }
 
   onSubmit() {
@@ -51,7 +53,7 @@ export class BlogComponent implements OnInit {
   }
 
   seeComments(blog: Blog): void {
-    this.router.navigate(['manage/comments/', JSON.stringify(blog)]);
+    this.router.navigate(['manage/comments/', blog.id]);
   }
 
   async inactive(blog: Blog){
@@ -68,10 +70,10 @@ export class BlogComponent implements OnInit {
 
 
   ngOnDestroy() {
-    var navbar = document.getElementsByTagName('nav')[0];
-    navbar.classList.remove('navbar-transparent');
-    // var body = document.getElementsByTagName('body')[0];
-    // body.classList.remove('index-page');
+    // var navbar = document.getElementsByTagName('nav')[0];
+    // navbar.classList.remove('navbar-transparent');
+    var body = document.getElementsByTagName('body')[0];
+    body.classList.remove('blogs-list');
   }
 
   newBlog() {

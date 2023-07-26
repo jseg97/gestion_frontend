@@ -6,7 +6,7 @@
 
 .blogDetail {
     display: flex; 
-    align-items: center; 
+    align-items: baseline; 
     justify-content: start; 
     gap: 1rem; 
     padding: 1.5em 0 ;
@@ -24,4 +24,8 @@
 
 .iconButton:hover {
     transform: scale(1.15);
+}
+
+.table th, .table td { 
+    vertical-align: middle;
 }

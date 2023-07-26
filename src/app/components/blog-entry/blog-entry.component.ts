@@ -24,7 +24,6 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
   text : string='';
   focus;
   focus1;
-  x: any
   comments : Comment[];
   userLogged:User;
   userId: number;
@@ -32,9 +31,9 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private modalService: NgbModal,private router : Router,private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
-    this.x = this.route.snapshot.paramMap.get('id');
-    this.getBlogById(parseInt(this.x))
+  constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getBlogById(parseInt(this.id))
     this.commentForm = this.formBuilder.group({
       content: '',
     });
@@ -88,7 +87,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
   async comment(){
     console.log(this.commentForm.get('content').value)
-    const response = await this.commentService.createComment(this.commentForm.get('content').value,this.x);
+    const response = await this.commentService.createComment(this.commentForm.get('content').value,this.id);
     if (response===null ){
       this.open(ModalErrorComponent, 'modal_mini', 'sm')
       
@@ -96,7 +95,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
   }
 
   async getComments() {
-    this.comments = await this.commentService.getFromBlogId(parseInt(this.x));
+    this.comments = await this.commentService.getFromBlogId(parseInt(this.id));
     console.log(this.comments);
     
 

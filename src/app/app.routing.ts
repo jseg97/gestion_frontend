@@ -84,10 +84,10 @@ const routes: Routes =[
         data: { roles: [Role.BlogAdmin] }
     },
     {
-        path: 'manage/comments/:blog',
+        path: 'manage/comments/:blogId',
         component: CommentComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.BlogAdmin] }
+        data: { roles: [Role.BlogAdmin, Role.Admin] }
     },
     {
         path: 'manage/comments/form/:id',

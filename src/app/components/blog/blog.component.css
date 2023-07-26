@@ -35,3 +35,7 @@
 .material-icons.hoverOcultar:hover::before{
     content: "visibility";
 }
+
+.table th, .table td { 
+    vertical-align: middle;
+}
