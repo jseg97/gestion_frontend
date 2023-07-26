@@ -46,9 +46,9 @@
 				<td>{{ blog.activo }}</td>
 				<td>
                     <div class="actionIcons">
-                        <i class="material-icons iconButton" (click)="edit(blog)">edit</i>
-                        <i class="material-icons iconButton" *ngIf="blog.is_active == 'Y'" (click)="inactive(blog)">visibility</i>
-                        <i class="material-icons iconButton" *ngIf="blog.is_active == 'N'" (click)="activate(blog)">visibility_off</i>
+                        <i class="material-icons iconButton" title="Editar Blog" (click)="edit(blog)">edit</i>
+                        <i class="material-icons iconButton hoverMostrar" title="Ocultar visualización del blog" *ngIf="blog.is_active == 'Y'" (click)="inactive(blog)"></i>
+                        <i class="material-icons iconButton hoverOcultar" title="Activar visualización del blog" *ngIf="blog.is_active == 'N'" (click)="activate(blog)"></i>
                         <i class="material-icons iconButton" (click)="seeComments(blog)">comment</i>
                     </div>
                 </td>

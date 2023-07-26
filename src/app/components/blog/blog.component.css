@@ -12,5 +12,26 @@
 
 
 .iconButton {
+    transition: all 0.15s ease-out;
     cursor: pointer;
+}
+
+.iconButton:hover {
+    transform: scale(1.15);
+}
+
+.material-icons.hoverMostrar::before{
+    content: "visibility";
+}
+
+.material-icons.hoverMostrar:hover::before{
+    content: "visibility_off";
+}
+
+.material-icons.hoverOcultar::before{
+    content: "visibility_off";
+}
+
+.material-icons.hoverOcultar:hover::before{
+    content: "visibility";
 }

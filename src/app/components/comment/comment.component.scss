@@ -17,6 +17,11 @@
 }
 
 
-.iconButton {
+.iconButton {    
+    transition: all 0.15s ease-out;
     cursor: pointer;
+}
+
+.iconButton:hover {
+    transform: scale(1.15);
 }
