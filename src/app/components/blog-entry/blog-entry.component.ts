@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentService } from '../_services/comment.service';
 import { DatePipe } from '@angular/common';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ModalErrorComponent } from '../modal-error/modal-error.component';
 
 
 @Component({
@@ -29,7 +31,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
+  constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
     this.x = this.route.snapshot.paramMap.get('id');
     this.getBlogById(parseInt(this.x))
     this.commentForm = this.formBuilder.group({
@@ -63,9 +65,13 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
     
   }
 
-  comment(){
+  async comment(){
     console.log(this.commentForm.get('content').value)
-    this.commentService.createComment(this.commentForm.get('content').value,this.x);
+    const response = await this.commentService.createComment(this.commentForm.get('content').value,this.x);
+    if (response===null ){
+      this.open(ModalErrorComponent, 'modal_mini', 'sm')
+      
+    }
   }
 
   async getComments() {
@@ -108,6 +114,41 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
     // console.log('isLogged'+( this.userLogged))
     
     return this.userLogged ? true : false;
+  }
+
+  closeResult: string;
+
+  open(content, type, modalDimension) {
+      if (modalDimension === 'sm' && type === 'modal_mini') {
+          this.modalService.open(content, { windowClass: 'modal-mini modal-primary', size: 'sm' }).result.then((result) => {
+              this.closeResult = `Closed with: ${result}`;
+          }, (reason) => {
+              this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          });
+      } else if (modalDimension == undefined && type === 'Login') {
+        this.modalService.open(content, { windowClass: 'modal-login modal-primary' }).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      } else {
+          this.modalService.open(content).result.then((result) => {
+              this.closeResult = `Closed with: ${result}`;
+          }, (reason) => {
+              this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          });
+      }
+
+  }
+
+  private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+          return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+          return 'by clicking on a backdrop';
+      } else {
+          return  `with: ${reason}`;
+      }
   }
 
 }

@@ -32,6 +32,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { BlogEntryComponent } from './blog-entry/blog-entry.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
+import { ModalErrorComponent } from './modal-error/modal-error.component';
 
 @NgModule({
     imports: [
@@ -66,7 +67,8 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
         AboutUsComponent,
         BlogEntryComponent,
         ContactoComponent,
-        CommentFormComponent
+        CommentFormComponent,
+        ModalErrorComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
