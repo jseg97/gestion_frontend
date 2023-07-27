@@ -57,7 +57,7 @@
                             <form [formGroup]="commentForm">
                                 <h3 class="pull-left">Nuevo comentario</h3>
                                 <button type="submit" (click)="comment()"
-                                    class="btn btn-normal pull-right">Publicar</button>
+                                    class="btn btn-normal pull-right btn-primary">Publicar</button>
                                 <fieldset id="content">
                                     <div class="row">
                                         <div class="col-sm-3 col-lg-2 hidden-xs">
@@ -79,7 +79,7 @@
                                 <div class="media">
                                     <a class="pull-left" href="#"><img class="media-object"
                                             src="./../../../assets/img/default-avatar.png" alt=""></a>
-                                    <form [formGroup]="commentForm">
+                                    <form [formGroup]="commentForm" class="commentEdit">
                                         <div class="media-body">
                                             <h4 class="media-heading">{{com.first_name}}</h4>
                                             <div>
