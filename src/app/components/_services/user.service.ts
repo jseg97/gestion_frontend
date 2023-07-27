@@ -102,4 +102,33 @@ export class UserService {
       return res;
     });
   }
+
+  async createPublicUser(us:User):Promise<any> {
+    var url = `${environment.apiUrl}/users`;
+
+    let body = {
+      id: null,
+      username : us.username,
+      firstName : us.firstName,
+      lastName : us.lastName,
+      email: us.email,
+      role: "User",
+      password: us.password,
+      is_active: 'Y'
+    };
+    
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    const options = {
+      headers: headers,
+    }
+    
+    return this.http.post(url, body, options).toPromise().then(res => {
+      return res;
+    });
+  }
 }

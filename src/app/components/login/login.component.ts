@@ -3,27 +3,33 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from '@app/components/_services';
+import { AuthenticationService, UserService } from '@app/components/_services';
 
-@Component({ templateUrl: 'login.component.html', styleUrls: ['./login.component.css']  })
+@Component({ templateUrl: 'login.component.html', styleUrls: ['./login.component.css'] })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
+    registerForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
     error = '';
-    data : Date = new Date();
+    data: Date = new Date();
     focus;
     focus1;
+    focus2;
+    focus3;
+    focus4;
+    focus5;
 
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
-    ) { 
+        private authenticationService: AuthenticationService,
+        private userService: UserService
+    ) {
         // redirect to home if already logged in
-        if (this.authenticationService.userValue) { 
+        if (this.authenticationService.userValue) {
             this.router.navigate(['/admin']);
         }
     }
@@ -33,6 +39,16 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+
+        this.registerForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8)]],
+            passwordConfirmation: ['', [Validators.required, Validators.minLength(8)]]
+        });
+
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -48,8 +64,10 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        this.error = '';
         // stop here if form is invalid
         if (this.loginForm.invalid) {
+            this.error = "Datos inválidos";
             return;
         }
 
@@ -64,11 +82,54 @@ export class LoginComponent implements OnInit {
                     this.error = error;
                     this.loading = false;
                 });
-        
-    }    
 
-    
-    ngOnDestroy(){
+    }
+
+    async createUser() {
+        this.submitted = true;
+        this.error = '';
+        if (this.samePassword()) {
+
+            if (this.registerForm.invalid) {
+                this.error = "Datos inválidos";
+                return;
+            }
+            
+            this.userService.createPublicUser(this.registerForm.value).then(res => {
+                if (res['success']) {
+                    location.reload();
+                } else {
+                    alert("Error durante la creación");
+                }
+            });
+        } else {
+            console.log("error")
+            alert("Contraseñas no coinciden")
+        }
+    }
+
+    samePassword() {
+        let p1 = this.registerForm.get("password");
+        let p2 = this.registerForm.get("passwordConfirmation")
+
+        // console.log(p1.value);
+        //   console.log(p2.value);
+        if (p1.value === p2.value) {
+            return true
+        } else {
+            p1.reset();
+            p2.reset();
+            this.error = "Contraseñas no coinciden";
+            return false;
+        }
+    }
+
+    showRegisterForm() {
+        document.getElementById("registerForm").style.display = "block";
+        document.getElementById("loginForm").style.display = "none";
+    }
+
+    ngOnDestroy() {
         var body = document.getElementsByTagName('body')[0];
         body.classList.remove('login-page');
 

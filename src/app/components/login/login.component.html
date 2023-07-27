@@ -9,7 +9,7 @@
     <div class="container">
         <div class="col-md-4 content-center">
             <div class="card card-login card-plain">
-                <form class="form"   [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <form class="form loginForm" id="loginForm"   [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="header header-primary text-center">
                         <div class="logo-container">
                             <img src="assets/img/logoGCForDarkBack.png" alt="">
@@ -29,7 +29,7 @@
                           <input type="text" placeholder="Password" class="form-control" formControlName="password" (focus)="focus1=true" (blur)="focus1=false"/>
                       </div>
                     </div>
-                    <button c class="btn btn-primary">
+                    <button class="btn btn-primary">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                         Login
                     </button>
@@ -39,19 +39,74 @@
                     </div> -->
                     <div class="pull-left">
                         <h6>
-                            <a href="#pablo" class="link">Create Account</a>
+                            <a (click)="showRegisterForm()" class="link">Registrar Cuenta</a>
                         </h6>
                     </div>
-                    <div class="pull-right">
+                    <!-- <div class="pull-right">
                         <h6>
                             <a href="#pablo" class="link">Need Help?</a>
                         </h6>
+                    </div> -->
+                </form>
+                <form class="form registerForm" id="registerForm"  [formGroup]="registerForm" (ngSubmit)="createUser()">
+                    <div class="header header-primary text-center">
+                        <div class="logo-container">
+                            Registro de Usuario
+                        </div>
                     </div>
+                    <div class="content">
+                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                        </div>
+                          <input type="text" class="form-control" placeholder="Nombre de Usuario" formControlName="username" (focus)="focus=true" (blur)="focus=false" >
+                      </div>
+
+                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                        </div>
+                          <input type="text" class="form-control" placeholder="Nombres" formControlName="firstName" (focus)="focus1=true" (blur)="focus1=false" >
+                      </div>
+
+                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus2===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                        </div>
+                          <input type="text" class="form-control" placeholder="Apellidos" formControlName="lastName" (focus)="focus2=true" (blur)="focus2=false" >
+                      </div>
+
+                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus3===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                        </div>
+                          <input type="text" class="form-control" placeholder="Email" formControlName="email" (focus)="focus3=true" (blur)="focus3=false" >
+                      </div>
+
+                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus4===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">  <i class="now-ui-icons users_circle-08"></i></span>
+                        </div>
+                          <input type="password" class="form-control" placeholder="Password" formControlName="password" (focus)="focus4=true" (blur)="focus4=false" >
+                      </div>
+                      
+                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus5===true}">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                        </div>
+                          <input type="password" placeholder="Password Confirmation " class="form-control" formControlName="passwordConfirmation" (focus)="focus5=true" (blur)="focus5=false"/>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Registrar Usuario
+                    </button>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
                 </form>
             </div>
         </div>
     </div>
-    <footer class="footer">
+    <footer class="footer" style="display: none;">
         <div class="container">
             <nav>
                 <ul>
@@ -79,11 +134,11 @@
             </nav>
             <div class="copyright">
                 &copy;
-              {{data | date: 'yyyy'}}, 
+              {{data | date: 'yyyy'}}
               <!-- Designed by
                 <a href="https://www.invisionapp.com" target="_blank">Invision</a>.  -->
-                Coded by
-                <a href="./login.component.html" target="_blank">Joan</a>.
+                <!-- Coded by
+                <a href="./login.component.html" target="_blank">Joan</a>. -->
             </div>
         </div>
     </footer>
