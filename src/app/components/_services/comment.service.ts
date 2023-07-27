@@ -64,7 +64,7 @@ export class CommentService {
     return this.http.put<Comment>(url, JSON.stringify(body), options).toPromise().then(res => res as Comment);
   }
 
-  createComment(texto:any, blogId:any):Promise<Comment> {
+  createComment(texto:any, blogId:any):Promise<any> {
     var url = `${environment.apiUrl}/comment`;
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -87,7 +87,7 @@ export class CommentService {
       headers: headers,
     }
     
-    return this.http.post<Comment>(url, JSON.stringify(body), options).toPromise().then(res => res as Comment);
+    return this.http.post<Comment>(url, JSON.stringify(body), options).toPromise().then(res => {return res});
   }
 
   async activateComment(comment:any) {

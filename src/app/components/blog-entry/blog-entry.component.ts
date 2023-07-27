@@ -31,7 +31,7 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private blogService : BlogService, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
+  constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private blogService : BlogService, private router : Router, private route : ActivatedRoute, private commentService : CommentService, private datePipe: DatePipe) { 
     this.id = this.route.snapshot.paramMap.get('id');
     this.getBlogById(parseInt(this.id))
     this.commentForm = this.formBuilder.group({
@@ -42,7 +42,9 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userLogged = JSON.parse(localStorage.getItem('user'));
-    this.userId = this.userLogged.id;
+    if(this.userLogged){
+      this.userId = this.userLogged.id;
+    }
     var rellaxHeader = new Rellax('.rellax-header');
 
     var body = document.getElementsByTagName('body')[0];
@@ -87,11 +89,23 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
 
   async comment(){
     console.log(this.commentForm.get('content').value)
-    const response = await this.commentService.createComment(this.commentForm.get('content').value,this.id);
-    if (response===null ){
+    if(this.userLogged){
+      this.commentService.createComment(this.commentForm.get('content').value,this.id).then(res => {
+        if (res['success']) {
+          location.reload();
+        } else {
+          alert("Error durante la piblocación del comentario");
+        }
+      });
+    }else{
       this.open(ModalErrorComponent, 'modal_mini', 'sm')
-      
     }
+    // const response = await this.commentService.createComment(this.commentForm.get('content').value,this.id);
+    
+    // if (response===null ){
+    //   this.open(ModalErrorComponent, 'modal_mini', 'sm')
+      
+    // }
   }
 
   async getComments() {
