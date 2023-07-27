@@ -31,11 +31,11 @@
       </div>
       <!-- <button type="submit" [disabled]="blogForm.invalid">Submit</button> -->
       <div class="btn-menu">
-        <button [disabled]="blogForm.invalid" (click)="updateBlog()" class="btn btn-primary btn-lg btn-action"
+        <button *ngIf="editing" [disabled]="blogForm.invalid" (click)="updateBlog()" class="btn btn-primary btn-lg btn-action"
           type="button">
           Modificar
         </button>
-        <button [disabled]="blogForm.invalid" (click)="createBlog()" class="btn btn-primary btn-lg btn-action"
+        <button *ngIf="!editing" [disabled]="blogForm.invalid" (click)="createBlog()" class="btn btn-primary btn-lg btn-action"
           type="button">
           Crear
         </button>

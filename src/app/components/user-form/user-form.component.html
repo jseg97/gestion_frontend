@@ -83,11 +83,11 @@
 				</div>
 			</div>
 			<div class="btn-menu">
-				<button [disabled]="userForm.invalid" (click)="updateUser()" class="btn btn-primary btn-lg btn-action"
+				<button *ngIf="editing" [disabled]="userForm.invalid" (click)="updateUser()" class="btn btn-primary btn-lg btn-action"
 					type="button">
 					Modificar
 				</button>
-				<button [disabled]="userForm.invalid" (click)="createUser()" class="btn btn-primary btn-lg btn-action"
+				<button *ngIf="!editing" [disabled]="userForm.invalid" (click)="createUser()" class="btn btn-primary btn-lg btn-action"
 					type="button">
 					Crear
 				</button>

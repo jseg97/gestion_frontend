@@ -15,15 +15,10 @@ export class UserFormComponent implements OnInit, OnDestroy {
   userUpdate: User;
   userLogged: User;
   userForm: FormGroup;
+  editing: boolean = false;
 
   constructor(private userService: UserService, private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private authenticationService: AuthenticationService) {
     this.authenticationService.user.subscribe(user => this.userLogged = user);
-
-    if (localStorage.getItem("userUpdate")) {
-      this.userUpdate = JSON.parse(localStorage.getItem("userUpdate"));
-      console.log(this.userUpdate);
-      localStorage.removeItem("userUpdate");
-    }
 
     this.userForm = this.formBuilder.group({
       id: [''],
@@ -36,23 +31,25 @@ export class UserFormComponent implements OnInit, OnDestroy {
       passwordConfirmation: ['', [Validators.required, Validators.minLength(8)]],
       role: ['', Validators.required]
     });
-    console.log(this.userForm.get('email').errors)
+
+    if (localStorage.getItem("userUpdate")) {
+      this.editing = true;
+      this.userUpdate = JSON.parse(localStorage.getItem("userUpdate"));
+      console.log(this.userUpdate);
+      localStorage.removeItem("userUpdate");
+      this.patchForm();
+    }
+    // console.log(this.userForm.get('email').errors)
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      // Perform any additional actions with the received data
-
-
-    });
-
     var rellaxHeader = new Rellax('.rellax-header');
 
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.remove('navbar-transparent');
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('user-form');
-    this.patchForm();
+    
   }
 
 

@@ -72,12 +72,6 @@ const routes: Routes =[
         data: { roles: [Role.BlogAdmin, Role.Admin] }
     },
     {
-        path: 'manage/blogs/form/:blog',
-        component: BlogFormComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.BlogAdmin] }
-    },
-    {
         path: 'manage/blogs/form',
         component: BlogFormComponent,
         canActivate: [AuthGuard],
@@ -101,7 +95,7 @@ const routes: Routes =[
         // data: { roles: [Role.Admin, Role.BlogAdmin] }
     },
     {
-        path: 'users/form/:user',
+        path: 'users/form',
         component: UserFormComponent,
         canActivate: [AuthGuard],
         // data: { roles: [Role.Admin, Role.BlogAdmin] }

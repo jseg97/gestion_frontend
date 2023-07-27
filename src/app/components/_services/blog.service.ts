@@ -22,15 +22,22 @@ export class BlogService {
     var url = `${environment.apiUrl}/blog`;
     const user = JSON.parse(localStorage.getItem('user'));
 
+
     let body = {
       id : blog.id,
       title : blog.title,
       description: blog.description,
       content : blog.content,
       updated: Date.now(),
-      user_updated: user.id,
-      is_active: blog.is_active
+      user_updated: user.id
     };
+
+    if(blog.is_active){
+      body["is_active"] = blog.is_active
+    }
+    
+    console.log(body);
+    
     
 
     const headers = new HttpHeaders({

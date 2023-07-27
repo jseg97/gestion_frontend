@@ -15,6 +15,7 @@ export class BlogFormComponent implements OnInit, OnDestroy {
   blogForm: FormGroup;
   blog: Blog;
   userLogged: User;
+  editing: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private blogService: BlogService) { }
 
@@ -26,12 +27,12 @@ export class BlogFormComponent implements OnInit, OnDestroy {
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('blog-form');
 
-    this.route.params.subscribe(params => {
-      this.blog = JSON.parse(params['blog']);
-      console.log(this.blog);
-      // Perform any additional actions with the received data
+    // this.route.params.subscribe(params => {
+    //   this.blog = JSON.parse(params['blog']);
+    //   console.log(this.blog);
+    //   // Perform any additional actions with the received data
 
-    });
+    // });
 
     this.blogForm = this.formBuilder.group({
       id: [''],
@@ -40,7 +41,15 @@ export class BlogFormComponent implements OnInit, OnDestroy {
       content: ['', Validators.required],
     });
 
-    this.patchForm(this.blog);
+    if (localStorage.getItem("blogUpdate")) {
+      this.editing = true;
+      this.blog = JSON.parse(localStorage.getItem("blogUpdate"));
+      console.log(this.blog);
+      localStorage.removeItem("blogUpdate");
+      this.patchForm(this.blog);
+    }
+
+    // this.patchForm(this.blog);
   }
 
   onSubmit() {

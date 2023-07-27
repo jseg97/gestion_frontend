@@ -44,7 +44,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   edit(user: User): void {
     localStorage.setItem('userUpdate', JSON.stringify(user));
-    this.router.navigate(['users/form', user]);    
+    this.router.navigate(['users/form']);    
   }
 
   async activate(user: User) {
@@ -67,6 +67,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   newUser() {   
-    this.router.navigate(['users/form', JSON.stringify({})]);
+    this.router.navigate(['users/form']);
   }
 }

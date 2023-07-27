@@ -49,7 +49,9 @@ export class BlogComponent implements OnInit {
     let blog = this.blogs.find(blog => {
       return blog.id === bl.id;
     })
-    this.router.navigate(['manage/blogs/form/', JSON.stringify(blog)]);
+    
+    localStorage.setItem('blogUpdate', JSON.stringify(blog));
+    this.router.navigate(['manage/blogs/form']);
   }
 
   seeComments(blog: Blog): void {
