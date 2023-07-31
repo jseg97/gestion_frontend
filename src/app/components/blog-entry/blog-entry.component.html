@@ -94,6 +94,7 @@
                                             <ul class="list-unstyled list-inline media-detail pull-right"
                                                 *ngIf="(userId == com.user_create) || isBlogAdmin">
                                                 <li class=""><a (click)="editComment(com.id)">Editar</a></li>
+                                                <li class=""><a (click)="inactive(com)">Eliminar</a></li>
                                                 <li class=""><a (click)="saveCommentChanges(com)"
                                                         *ngIf="editCommentId === com.id">Guardar</a></li>
                                             </ul>

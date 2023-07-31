@@ -92,7 +92,7 @@ const routes: Routes =[
         path: 'users',
         component: UsersComponent,
         canActivate: [AuthGuard],
-        // data: { roles: [Role.Admin, Role.BlogAdmin] }
+        data: { roles: [Role.Admin, Role.BlogAdmin] }
     },
     {
         path: 'users/form',
@@ -100,12 +100,12 @@ const routes: Routes =[
         canActivate: [AuthGuard],
         // data: { roles: [Role.Admin, Role.BlogAdmin] }
     },
-    {
-        path: 'users/form',
-        component: UserFormComponent,
-        canActivate: [AuthGuard],
-        // data: { roles: [Role.Admin] }
-    },
+    // {
+    //     path: 'users/form',
+    //     component: UserFormComponent,
+    //     canActivate: [AuthGuard],
+    //     // data: { roles: [Role.Admin] }
+    // },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

@@ -12,7 +12,8 @@ import { PassThrough } from 'stream';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit, OnDestroy {
-  userUpdate: User;
+  userUpdate: any;
+  userForUpdate: any;
   userLogged: User;
   userForm: FormGroup;
   editing: boolean = false;
@@ -34,10 +35,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
     if (localStorage.getItem("userUpdate")) {
       this.editing = true;
-      this.userUpdate = JSON.parse(localStorage.getItem("userUpdate"));
-      console.log(this.userUpdate);
+      // this.userUpdate = JSON.parse(localStorage.getItem("userUpdate"));
+      // console.log("Si es update");
+      let uid=JSON.parse(localStorage.getItem("userUpdate")).id
+      // console.log(uid);
       localStorage.removeItem("userUpdate");
-      this.patchForm();
+      this.loadUser(uid);
+      
     }
     // console.log(this.userForm.get('email').errors)
   }
@@ -52,7 +56,12 @@ export class UserFormComponent implements OnInit, OnDestroy {
     
   }
 
-
+  async loadUser(uid: number) {
+    let user = await this.userService.getById(uid);
+    user['passwordConfirmation'] = user.password;
+    this.userUpdate = user;
+    this.patchForm();
+  }
 
   onSubmit() {
   }
@@ -74,8 +83,22 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   async updateUser() {
-    this.userUpdate = await this.userService.updateUser(this.userForm.value);
-    this.router.navigate(['users']);
+    if (this.samePassword()) {
+      this.userService.updateUser(this.userForm.value).then(res => {
+        if (res['success']) {
+          alert(res['message']);
+          this.router.navigate(['users']);
+        } else {
+          alert(res['message']);
+        }
+      });
+    } else {
+      console.log("error")
+      alert("Contraseñas no coinciden")
+    }
+
+    // this.userUpdate = await this.userService.updateUser(this.userForm.value);
+    // this.router.navigate(['users']);
   }
 
   async createUser() {
@@ -83,9 +106,10 @@ export class UserFormComponent implements OnInit, OnDestroy {
     if (this.samePassword()) {
       this.userService.createUser(this.userForm.value).then(res => {
         if (res['success']) {
+          alert(res['message']);
           this.router.navigate(['users']);
         } else {
-          alert("Error durante la creación");
+          alert(res['message']);
         }
       });
     } else {

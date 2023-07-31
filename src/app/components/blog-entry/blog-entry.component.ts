@@ -74,6 +74,12 @@ export class BlogEntryComponent implements OnInit, OnDestroy {
     
   }
   
+  async inactive(comment: Comment){
+    // comment.user_update = JSON.parse(localStorage.getItem('user')).id;
+    await this.commentService.inactivateComment(comment);
+    location.reload();
+  }
+
   ngOnDestroy(){
     var body = document.getElementsByTagName('body')[0];
     body.classList.remove('landing-page');

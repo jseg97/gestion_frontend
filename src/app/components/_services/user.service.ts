@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/components/_models';
+import { User, Role } from '@app/components/_models';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -12,8 +12,21 @@ export class UserService {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(id: number) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+    async getById(id: number):Promise<any> {
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${user.token}`,
+      });
+  
+      const options = {
+        headers: headers,
+      }
+      return this.http.get(`${environment.apiUrl}/users/${id}`, options).toPromise().then(res => {
+        return res;
+      });
     }
 
     updateUser(u:User):Promise<User> {
@@ -112,7 +125,7 @@ export class UserService {
       firstName : us.firstName,
       lastName : us.lastName,
       email: us.email,
-      role: "User",
+      role: Role.User,
       password: us.password,
       is_active: 'Y'
     };

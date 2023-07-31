@@ -4,9 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService, UserService } from '@app/components/_services';
+import { User } from '../_models/user';
 
 @Component({ templateUrl: 'login.component.html', styleUrls: ['./login.component.css'] })
 export class LoginComponent implements OnInit {
+    u : User;
     loginForm: FormGroup;
     registerForm: FormGroup;
     loading = false;
@@ -30,7 +32,10 @@ export class LoginComponent implements OnInit {
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.userValue) {
-            this.router.navigate(['/admin']);
+            this.authenticationService.user.subscribe(x => this.u = x);
+            localStorage.setItem('userUpdate', JSON.stringify(this.u));
+            this.router.navigate(['users/form']); 
+            // this.router.navigate(['/admin']);
         }
     }
 
@@ -97,9 +102,10 @@ export class LoginComponent implements OnInit {
             
             this.userService.createPublicUser(this.registerForm.value).then(res => {
                 if (res['success']) {
+                    alert(res['message']);
                     location.reload();
                 } else {
-                    alert("Error durante la creación");
+                    alert(res['message']);
                 }
             });
         } else {
