@@ -17,7 +17,7 @@
     "start": "ng serve",
     "prod": "ng serve --host=0.0.0.0 --disable-host-check",
     "run": "ng serve --host=0.0.0.0 --disable-host-check",
-    "build": "ng build",
+    "build": "ng build --prod && mv dist/gestion_frontend _static",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
