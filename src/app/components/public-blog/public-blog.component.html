@@ -21,7 +21,7 @@
             <div class="card-container">
                 <div class="card" *ngFor="let blog of blogs">
                     <div class="card-header">
-                        <img src="../../../assets/img/blogs.jfif" alt="" />
+                        <img src="assets/img/blogs.jfif" alt="" />
                     </div>
                     <div class="card-body">
                         <span class="tag tag-teal">{{blog.category}}</span>
@@ -31,14 +31,14 @@
                         </p>
                         <div style="display: flex; justify-content: space-between; width: 100%;">
                         <div class="user">
-                            <img src="../../../assets/img/avatar.jpg"
+                            <img src="assets/img/avatar.jpg"
                                 alt="" />
                             <div class="user-info">
                                 <h5>{{blog.firstName}}</h5>
                                 <!-- <small>2h ago</small> -->
                                 <small>{{blog.date}}</small>
                             </div>
-                        </div>                        
+                        </div>
                         <a [routerLink]="['/blog/entry', blog.id]"><span style="padding: 8pt 0;">Ver mas</span></a>
                       </div>
                     </div>

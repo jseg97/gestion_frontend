@@ -43,6 +43,7 @@
     "@types/quill": "^2.0.10",
     "ajv": "7.0.0",
     "ajv-keywords": "4.0.0",
+    "angular-cli-ghpages": "^1.0.6",
     "bootstrap": "4.5.3",
     "copy-webpack-plugin": "7.0.0",
     "core-js": "3.8.1",
