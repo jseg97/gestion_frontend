@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import * as Rellax from 'rellax';
 
 @Component({
   selector: 'app-about-us',
@@ -10,8 +11,8 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
+    var rellaxHeader = new Rellax('.rellax-header');
 
-    
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
   }

@@ -40,7 +40,7 @@ We wanted to fully display the power of this kit, so the kit comes packed with e
 7. Navigate to [localhost:4200](localhost:4200)
 ## Desplegar en GitHub Pages
 
-1. Asegurarse de tener instalado la dependencia <<< npm i angular-cli-ghpages >>>
+1. Asegurarse de tener instalado la dependencia ```npm i angular-cli-ghpages```
 2. Open Terminal
 3. Go to your file project
 4. Run in terminal: ```ng build --base-href "https://jseg97.github.io/gestion_frontend/"``` (Guarda un build del website en la carpeta dist/)
